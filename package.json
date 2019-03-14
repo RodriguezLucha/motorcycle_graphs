@@ -1,0 +1,32 @@
+{
+    "name": "motorcycle_graphs",
+    "version": "1.0.0",
+    "description": "D3 visualizations for motorcycle statistics",
+    "private": true,
+    "scripts": {
+        "webpack": "webpack --watch --mode=development",
+        "build": "webpack --config webpack.config.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/RodriguezLucha/motorcycle_graphs.git"
+    },
+    "keywords": [
+        "motorcycles"
+    ],
+    "author": "Rudy",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/RodriguezLucha/motorcycle_graphs/issues"
+    },
+    "homepage": "https://github.com/RodriguezLucha/motorcycle_graphs#readme",
+    "dependencies": {
+        "@babel/core": "^7.3.4",
+        "@babel/preset-env": "^7.3.4",
+        "babel-loader": "^8.0.5",
+        "lodash": "^4.17.11",
+        "webpack": "^4.29.6",
+        "webpack-cli": "^3.2.3"
+    }
+}
