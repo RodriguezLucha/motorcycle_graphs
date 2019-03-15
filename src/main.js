@@ -1,37 +1,28 @@
-let width = 600,
-  height = 400;
+import * as d3 from 'd3';
+import * as topojson from 'topojson';
 
-let projection = d3.geoConicEqualArea()
-  .scale(153)
-  .translate([width / 2, height / 2])
-  .precision(.1);
+let svg = d3.select('svg'),
+  width = +svg.attr('width');
+
+let projection = d3.geoMercator()
+  .center([-122.433701, 37.767683])
+  .scale(211000)
+  .translate([width / 2, 310]);
 
 let path = d3.geoPath()
   .projection(projection);
 
-let graticule = d3.geoGraticule();
+let promises = [d3.json('data/sf.json')];
+Promise.all(promises).then(ready);
 
-let svg = d3.select('body').append('svg')
-  .attr('width', width)
-  .attr('height', height);
+function ready([us]) {
+  let precincts = topojson.feature(us, us.objects.precinct);
 
-d3.json('data/sf.topojson', (error, world) => {
-  if (error) throw error;
-
-  svg.append('path')
-    .datum(topojson.feature(world, world.objects.land))
-    .attr('class', 'land')
+  svg.append('g')
+    .attr('class', 'precinct')
+    .selectAll('path')
+    .data(precincts.features)
+    .enter()
+    .append('path')
     .attr('d', path);
-
-  svg.append('path')
-    .datum(topojson.mesh(world, world.objects.countries, (a, b) => a !== b))
-    .attr('class', 'boundary')
-    .attr('d', path);
-
-  svg.append('path')
-    .datum(graticule)
-    .attr('class', 'graticule')
-    .attr('d', path);
-});
-
-d3.select(self.frameElement).style('height', `${height  }px`);
+}

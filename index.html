@@ -1,93 +1,19 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-.precinct {
-    fill: #555;
-}
+<html lang="en">
 
-.precinct-boundary {
-    fill: none;
-  stroke: #fff;
-  stroke-width: none;
-}
-</style>
-<script src="https://d3js.org/d3.v5.min.js"></script>
-<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-<script src="https://d3js.org/topojson.v2.min.js"></script>
-<script src="https://d3js.org/d3-geo.v1.min.js"></script>
-<svg width="960" height="600"></svg>
-<script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Motorcycle Parking in SF</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://d3js.org/topojson.v3.min.js"></script>
+</head>
 
+<body>
+  <svg width="960" height="600"></svg>
+  <script src="dist/bundle.js"></script>
+</body>
 
-var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
-
-var projection = d3.geoMercator()
-    .center([-122.433701, 37.767683])
-    .scale(211000)
-    .translate([width / 2, 310]);
-  
-var path = d3.geoPath()
-    .projection(projection);
-    // var projection = d3.geoOrthographic();
-
-    //   var path = d3.geoPath()
-    //     .projection(projection);
-
-var x = d3.scaleLinear()
-    .domain([0, 10])
-    .rangeRound([600, 860]);
-
-var color = d3.scaleThreshold()
-    .domain(d3.range(1, 9))
-    .range(d3.schemeBlues[9]);
-
-// var g = svg.append("g")
-//     .attr("class", "key")
-//     .attr("transform", "translate(0,40)");
-
-var promises = [ d3.json("data/sf_2.json")];
-Promise.all(promises).then(ready)
-
-function ready([us]) {
-  console.log(us)
-  var precincts = topojson.feature(us, us.objects.precinct);
-console.log(precincts)
-
- 
- 
- svg.append("g")
-    .attr("class", "precinct")
-    .selectAll("path")
-    .data(precincts.features)
-    .enter()
-    .append("path")
-    .attr("d", path)
-    .append('svg:title').text(function (d) {
-      return ("GeoID: " + d.id);
-    });
-
-  //Borders 
-  // svg.append("path")
-  //   .datum(topojson.mesh(us, us.objects.precinct))
-  //   .attr("class", "precinct-boundary")
-  //   .attr("d", path)
-  //   .attr('fill', function (d) { return color(d.rate = 7); })
-
-  // svg.append("g")
-  //   .selectAll("path")
-  //   	.data(topojson.feature(us, us.objects.precinct).features)         // convert TopoJSON to GeoJSON.
-  //   	// .data(topojson.feature(us, us.objects.precinct).features)         // convert TopoJSON to GeoJSON.
-  //   	//.data(topojson.feature(us, us.objects.counties).features)         // convert TopoJSON to GeoJSON.
-  //   .enter().append("path")
-  //     .attr("fill", function(d) { return color(d.rate = 7) })
-  //     .attr("d", path);
-
-  //   //Borders 
-  // svg.append("path")
-  //   .datum(topojson.mesh(us, us.objects.precinct, function (a, b) { return a !== b; }))
-  //   .attr("class", "precinct-boundary")
-  //   .attr("d", path); 
-}
-</script>
+</html>
