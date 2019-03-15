@@ -31541,18 +31541,32 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var svg = d3__WEBPACK_IMPORTED_MODULE_0__["select"]('svg'),
+    height = +svg.attr('height'),
     width = +svg.attr('width');
-var projection = d3__WEBPACK_IMPORTED_MODULE_0__["geoMercator"]().center([-122.433701, 37.767683]).scale(211000).translate([width / 2, 310]);
+var projection = d3__WEBPACK_IMPORTED_MODULE_0__["geoMercator"]().center([-122.433701, 37.767683]).scale(211000).translate([width / 2, height / 2]);
 var path = d3__WEBPACK_IMPORTED_MODULE_0__["geoPath"]().projection(projection);
-var promises = [d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/sf.json')];
+var promises = [d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/sf.json'), d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/metered.json'), d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/unmetered.json')];
 Promise.all(promises).then(ready);
 
 function ready(_ref) {
-  var _ref2 = _slicedToArray(_ref, 1),
-      us = _ref2[0];
+  var _ref2 = _slicedToArray(_ref, 2),
+      sf = _ref2[0],
+      metered = _ref2[1];
 
-  var precincts = topojson__WEBPACK_IMPORTED_MODULE_1__["feature"](us, us.objects.precinct);
+  var metered_coordinates = metered.data.map(function (e) {
+    var gps = e[24];
+    var lat = gps[1];
+    var lng = gps[2];
+    var coordinates = [+lat, +lng];
+    return coordinates;
+  });
+  var precincts = topojson__WEBPACK_IMPORTED_MODULE_1__["feature"](sf, sf.objects.precinct);
   svg.append('g').attr('class', 'precinct').selectAll('path').data(precincts.features).enter().append('path').attr('d', path);
+  d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').selectAll('circle').data(metered_coordinates).enter().append('circle').attr('r', 3.5).attr('class', 'lm').attr('cx', function (d) {
+    return projection([d[1], d[0]])[0];
+  }).attr('cy', function (d) {
+    return projection([d[1], d[0]])[1];
+  });
 }
 
 /***/ })

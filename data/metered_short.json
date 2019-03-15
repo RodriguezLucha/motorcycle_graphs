@@ -1,0 +1,1112 @@
+{
+  "meta": {
+    "view": {
+      "id": "uf55-k7py",
+      "name": "Metered motorcycle spaces",
+      "attribution": "SFMTA, SFpark",
+      "attributionLink": "http://sfpark.org/resources/motorcycle-parking-census-gis-data/",
+      "averageRating": 0,
+      "category": "Transportation",
+      "createdAt": 1338785271,
+      "description": "This dataset includes metered motorcycle parking spaces in San Francisco as of April 2013. Find attached a data dictionary, a version of the map as a PDF, and a shapefile of the data. This data provides locations of motorcycle meters; meter characteristics, such as single-space or multi-space meter, smart meter status, sensor status, owner, on- or off-street location; rate area.",
+      "displayType": "table",
+      "downloadCount": 2171,
+      "hideFromCatalog": false,
+      "hideFromDataJson": false,
+      "indexUpdatedAt": 1442441475,
+      "licenseId": "PDDL",
+      "newBackend": false,
+      "numberOfComments": 1,
+      "oid": 3506486,
+      "provenance": "official",
+      "publicationAppendEnabled": false,
+      "publicationDate": 1367949987,
+      "publicationGroup": 353810,
+      "publicationStage": "published",
+      "rowClass": "",
+      "rowIdentifierColumnId": 63977779,
+      "rowsUpdatedAt": 1367949976,
+      "rowsUpdatedBy": "zn8n-8wyr",
+      "tableId": 843134,
+      "totalTimesRated": 0,
+      "viewCount": 2215,
+      "viewLastModified": 1458062840,
+      "viewType": "tabular",
+      "columns": [{
+        "id": -1,
+        "name": "sid",
+        "dataTypeName": "meta_data",
+        "fieldName": ":sid",
+        "position": 0,
+        "renderTypeName": "meta_data",
+        "format": {},
+        "flags": ["hidden"]
+      }, {
+        "id": -1,
+        "name": "id",
+        "dataTypeName": "meta_data",
+        "fieldName": ":id",
+        "position": 0,
+        "renderTypeName": "meta_data",
+        "format": {},
+        "flags": ["hidden"]
+      }, {
+        "id": -1,
+        "name": "position",
+        "dataTypeName": "meta_data",
+        "fieldName": ":position",
+        "position": 0,
+        "renderTypeName": "meta_data",
+        "format": {},
+        "flags": ["hidden"]
+      }, {
+        "id": -1,
+        "name": "created_at",
+        "dataTypeName": "meta_data",
+        "fieldName": ":created_at",
+        "position": 0,
+        "renderTypeName": "meta_data",
+        "format": {},
+        "flags": ["hidden"]
+      }, {
+        "id": -1,
+        "name": "created_meta",
+        "dataTypeName": "meta_data",
+        "fieldName": ":created_meta",
+        "position": 0,
+        "renderTypeName": "meta_data",
+        "format": {},
+        "flags": ["hidden"]
+      }, {
+        "id": -1,
+        "name": "updated_at",
+        "dataTypeName": "meta_data",
+        "fieldName": ":updated_at",
+        "position": 0,
+        "renderTypeName": "meta_data",
+        "format": {},
+        "flags": ["hidden"]
+      }, {
+        "id": -1,
+        "name": "updated_meta",
+        "dataTypeName": "meta_data",
+        "fieldName": ":updated_meta",
+        "position": 0,
+        "renderTypeName": "meta_data",
+        "format": {},
+        "flags": ["hidden"]
+      }, {
+        "id": -1,
+        "name": "meta",
+        "dataTypeName": "meta_data",
+        "fieldName": ":meta",
+        "position": 0,
+        "renderTypeName": "meta_data",
+        "format": {},
+        "flags": ["hidden"]
+      }, {
+        "id": 63977778,
+        "name": "ID",
+        "dataTypeName": "number",
+        "fieldName": "id",
+        "position": 3,
+        "renderTypeName": "number",
+        "tableColumnId": 3061843,
+        "width": 124,
+        "cachedContents": {
+          "non_null": 2273,
+          "average": "1137",
+          "largest": "2273",
+          "null": 0,
+          "top": [{
+            "item": "2256",
+            "count": 20
+          }, {
+            "item": "2257",
+            "count": 19
+          }, {
+            "item": "2258",
+            "count": 18
+          }, {
+            "item": "2259",
+            "count": 17
+          }, {
+            "item": "2260",
+            "count": 16
+          }, {
+            "item": "2261",
+            "count": 15
+          }, {
+            "item": "2262",
+            "count": 14
+          }, {
+            "item": "2263",
+            "count": 13
+          }, {
+            "item": "2264",
+            "count": 12
+          }, {
+            "item": "2265",
+            "count": 11
+          }, {
+            "item": "2266",
+            "count": 10
+          }, {
+            "item": "2267",
+            "count": 9
+          }, {
+            "item": "2268",
+            "count": 8
+          }, {
+            "item": "2269",
+            "count": 7
+          }, {
+            "item": "2270",
+            "count": 6
+          }, {
+            "item": "2271",
+            "count": 5
+          }, {
+            "item": "2272",
+            "count": 4
+          }, {
+            "item": "2273",
+            "count": 3
+          }],
+          "smallest": "1",
+          "sum": "2584401"
+        },
+        "format": {
+          "precisionStyle": "standard",
+          "noCommas": "true",
+          "align": "right"
+        }
+      }, {
+        "id": 63977779,
+        "name": "POST_ID",
+        "dataTypeName": "text",
+        "fieldName": "post_id",
+        "position": 4,
+        "renderTypeName": "text",
+        "tableColumnId": 3061844,
+        "width": 184,
+        "cachedContents": {
+          "non_null": 2273,
+          "largest": "902-00640",
+          "null": 0,
+          "top": [{
+            "item": "563-01084",
+            "count": 20
+          }, {
+            "item": "563-01085",
+            "count": 19
+          }, {
+            "item": "418-06022",
+            "count": 18
+          }, {
+            "item": "471-06373",
+            "count": 17
+          }, {
+            "item": "684-00950",
+            "count": 16
+          }, {
+            "item": "840-22350",
+            "count": 15
+          }, {
+            "item": "471-06374",
+            "count": 14
+          }, {
+            "item": "418-06023",
+            "count": 13
+          }, {
+            "item": "611-04110",
+            "count": 12
+          }, {
+            "item": "611-04090",
+            "count": 11
+          }, {
+            "item": "611-04070",
+            "count": 10
+          }, {
+            "item": "684-00890",
+            "count": 9
+          }, {
+            "item": "684-00870",
+            "count": 8
+          }, {
+            "item": "840-22330",
+            "count": 7
+          }, {
+            "item": "471-06372",
+            "count": 6
+          }, {
+            "item": "401-07250",
+            "count": 5
+          }, {
+            "item": "840-22270",
+            "count": 4
+          }, {
+            "item": "840-22290",
+            "count": 3
+          }],
+          "smallest": "104-02960"
+        },
+        "format": {}
+      }, {
+        "id": 63977780,
+        "name": "MS_ID",
+        "dataTypeName": "text",
+        "fieldName": "ms_id",
+        "position": 5,
+        "renderTypeName": "text",
+        "tableColumnId": 3061845,
+        "width": 160,
+        "cachedContents": {
+          "non_null": 2273,
+          "largest": "892-00001",
+          "null": 0,
+          "top": [{
+            "item": "-",
+            "count": 20
+          }, {
+            "item": "684-03470",
+            "count": 19
+          }, {
+            "item": "684-03390",
+            "count": 18
+          }, {
+            "item": "525-00800",
+            "count": 17
+          }, {
+            "item": "525-00600",
+            "count": 16
+          }, {
+            "item": "525-00500",
+            "count": 15
+          }, {
+            "item": "324-05050",
+            "count": 14
+          }, {
+            "item": "606-15180",
+            "count": 13
+          }, {
+            "item": "501-01100",
+            "count": 12
+          }, {
+            "item": "444-00080",
+            "count": 11
+          }, {
+            "item": "561-00140",
+            "count": 10
+          }, {
+            "item": "561-00120",
+            "count": 9
+          }, {
+            "item": "561-00370",
+            "count": 8
+          }, {
+            "item": "561-00310",
+            "count": 7
+          }, {
+            "item": "359-05320",
+            "count": 6
+          }, {
+            "item": "359-05160",
+            "count": 5
+          }, {
+            "item": "359-05170",
+            "count": 4
+          }, {
+            "item": "359-05190",
+            "count": 3
+          }, {
+            "item": "596-00380",
+            "count": 2
+          }, {
+            "item": "892-00001",
+            "count": 1
+          }],
+          "smallest": "-"
+        },
+        "format": {}
+      }, {
+        "id": 63977781,
+        "name": "MS_SPACEID",
+        "dataTypeName": "number",
+        "fieldName": "ms_spaceid",
+        "position": 6,
+        "renderTypeName": "number",
+        "tableColumnId": 3061846,
+        "width": 220,
+        "cachedContents": {
+          "non_null": 2273,
+          "average": "4.770787505499340",
+          "largest": "74",
+          "null": 0,
+          "top": [{
+            "item": "1",
+            "count": 20
+          }, {
+            "item": "0",
+            "count": 19
+          }, {
+            "item": "13",
+            "count": 18
+          }, {
+            "item": "22",
+            "count": 17
+          }, {
+            "item": "14",
+            "count": 16
+          }, {
+            "item": "2",
+            "count": 15
+          }, {
+            "item": "20",
+            "count": 14
+          }, {
+            "item": "5",
+            "count": 13
+          }, {
+            "item": "9",
+            "count": 12
+          }, {
+            "item": "6",
+            "count": 11
+          }, {
+            "item": "30",
+            "count": 10
+          }, {
+            "item": "32",
+            "count": 9
+          }, {
+            "item": "34",
+            "count": 8
+          }, {
+            "item": "18",
+            "count": 7
+          }, {
+            "item": "12",
+            "count": 6
+          }, {
+            "item": "4",
+            "count": 5
+          }, {
+            "item": "8",
+            "count": 4
+          }, {
+            "item": "3",
+            "count": 3
+          }, {
+            "item": "7",
+            "count": 2
+          }, {
+            "item": "10",
+            "count": 1
+          }],
+          "smallest": "0",
+          "sum": "10844"
+        },
+        "format": {}
+      }, {
+        "id": 63977782,
+        "name": "CAP_COLOR",
+        "dataTypeName": "text",
+        "fieldName": "cap_color",
+        "position": 7,
+        "renderTypeName": "text",
+        "tableColumnId": 3061847,
+        "width": 208,
+        "cachedContents": {
+          "non_null": 2273,
+          "largest": "Black",
+          "null": 0,
+          "top": [{
+            "item": "Black",
+            "count": 20
+          }],
+          "smallest": "Black"
+        },
+        "format": {}
+      }, {
+        "id": 63977783,
+        "name": "METER_TYPE",
+        "dataTypeName": "text",
+        "fieldName": "meter_type",
+        "position": 8,
+        "renderTypeName": "text",
+        "tableColumnId": 3061848,
+        "width": 220,
+        "cachedContents": {
+          "non_null": 2273,
+          "largest": "SS",
+          "null": 0,
+          "top": [{
+            "item": "MS",
+            "count": 20
+          }, {
+            "item": "SS",
+            "count": 19
+          }],
+          "smallest": "MS"
+        },
+        "format": {}
+      }, {
+        "id": 63977784,
+        "name": "SMART_METE",
+        "dataTypeName": "text",
+        "fieldName": "smart_mete",
+        "position": 9,
+        "renderTypeName": "text",
+        "tableColumnId": 3061849,
+        "width": 220,
+        "cachedContents": {
+          "non_null": 2273,
+          "largest": "Y",
+          "null": 0,
+          "top": [{
+            "item": "N",
+            "count": 20
+          }, {
+            "item": "Y",
+            "count": 19
+          }],
+          "smallest": "N"
+        },
+        "format": {}
+      }, {
+        "id": 63977785,
+        "name": "ACTIVESENS",
+        "dataTypeName": "text",
+        "fieldName": "activesens",
+        "position": 10,
+        "renderTypeName": "text",
+        "tableColumnId": 3061850,
+        "width": 220,
+        "cachedContents": {
+          "non_null": 2273,
+          "largest": "Y",
+          "null": 0,
+          "top": [{
+            "item": "N",
+            "count": 20
+          }, {
+            "item": "Y",
+            "count": 19
+          }],
+          "smallest": "N"
+        },
+        "format": {}
+      }, {
+        "id": 63977786,
+        "name": "JURISDICTI",
+        "dataTypeName": "text",
+        "fieldName": "jurisdicti",
+        "position": 11,
+        "renderTypeName": "text",
+        "tableColumnId": 3061851,
+        "width": 220,
+        "cachedContents": {
+          "non_null": 2273,
+          "largest": "SFMTA",
+          "null": 0,
+          "top": [{
+            "item": "SFMTA",
+            "count": 20
+          }, {
+            "item": "PORT",
+            "count": 19
+          }],
+          "smallest": "PORT"
+        },
+        "format": {}
+      }, {
+        "id": 63977787,
+        "name": "ON_OFF_STR",
+        "dataTypeName": "text",
+        "fieldName": "on_off_str",
+        "position": 12,
+        "renderTypeName": "text",
+        "tableColumnId": 3061852,
+        "width": 220,
+        "cachedContents": {
+          "non_null": 2273,
+          "largest": "ON",
+          "null": 0,
+          "top": [{
+            "item": "ON",
+            "count": 20
+          }, {
+            "item": "OFF",
+            "count": 19
+          }],
+          "smallest": "OFF"
+        },
+        "format": {}
+      }, {
+        "id": 63977788,
+        "name": "OSP_ID",
+        "dataTypeName": "number",
+        "fieldName": "osp_id",
+        "position": 13,
+        "renderTypeName": "number",
+        "tableColumnId": 3061853,
+        "width": 172,
+        "cachedContents": {
+          "non_null": 2273,
+          "average": "17.67531896172459",
+          "largest": "902",
+          "null": 0,
+          "top": [{
+            "item": "0",
+            "count": 20
+          }, {
+            "item": "902",
+            "count": 19
+          }, {
+            "item": "890",
+            "count": 18
+          }, {
+            "item": "892",
+            "count": 17
+          }],
+          "smallest": "0",
+          "sum": "40176"
+        },
+        "format": {}
+      }, {
+        "id": 63977789,
+        "name": "RATEAREA",
+        "dataTypeName": "text",
+        "fieldName": "ratearea",
+        "position": 14,
+        "renderTypeName": "text",
+        "tableColumnId": 3061854,
+        "width": 196,
+        "cachedContents": {
+          "non_null": 2273,
+          "largest": "PortMC2",
+          "null": 0,
+          "top": [{
+            "item": "MC3",
+            "count": 20
+          }, {
+            "item": "PortMC1",
+            "count": 19
+          }, {
+            "item": "MC5",
+            "count": 18
+          }, {
+            "item": "MC2",
+            "count": 17
+          }, {
+            "item": "MC1",
+            "count": 16
+          }, {
+            "item": "PortMC2",
+            "count": 15
+          }],
+          "smallest": "MC1"
+        },
+        "format": {}
+      }, {
+        "id": 63977790,
+        "name": "SFPARKAREA",
+        "dataTypeName": "text",
+        "fieldName": "sfparkarea",
+        "position": 15,
+        "renderTypeName": "text",
+        "tableColumnId": 3061855,
+        "width": 220,
+        "cachedContents": {
+          "non_null": 2273,
+          "largest": "South Embarcadero",
+          "null": 0,
+          "top": [{
+            "item": " ",
+            "count": 20
+          }, {
+            "item": "South Embarcadero",
+            "count": 19
+          }, {
+            "item": "Downtown",
+            "count": 18
+          }, {
+            "item": "Civic Center",
+            "count": 17
+          }, {
+            "item": "Mission",
+            "count": 16
+          }, {
+            "item": "Fillmore",
+            "count": 15
+          }, {
+            "item": "Marina",
+            "count": 14
+          }, {
+            "item": "Fisherman's Wharf",
+            "count": 13
+          }],
+          "smallest": " "
+        },
+        "format": {}
+      }, {
+        "id": 63977791,
+        "name": "STREET_NUM",
+        "dataTypeName": "number",
+        "fieldName": "street_num",
+        "position": 16,
+        "renderTypeName": "number",
+        "tableColumnId": 3061856,
+        "width": 220,
+        "cachedContents": {
+          "non_null": 2273,
+          "average": "554.4249890013198",
+          "largest": "4630",
+          "null": 0,
+          "top": [{
+            "item": "347",
+            "count": 20
+          }, {
+            "item": "60",
+            "count": 19
+          }, {
+            "item": "101",
+            "count": 18
+          }, {
+            "item": "50",
+            "count": 17
+          }, {
+            "item": "505",
+            "count": 16
+          }, {
+            "item": "516",
+            "count": 15
+          }, {
+            "item": "110",
+            "count": 14
+          }, {
+            "item": "14",
+            "count": 13
+          }, {
+            "item": "12",
+            "count": 12
+          }, {
+            "item": "37",
+            "count": 11
+          }, {
+            "item": "31",
+            "count": 10
+          }, {
+            "item": "532",
+            "count": 9
+          }, {
+            "item": "517",
+            "count": 8
+          }, {
+            "item": "519",
+            "count": 7
+          }, {
+            "item": "38",
+            "count": 6
+          }, {
+            "item": "0",
+            "count": 5
+          }, {
+            "item": "219",
+            "count": 4
+          }, {
+            "item": "217",
+            "count": 3
+          }, {
+            "item": "523",
+            "count": 2
+          }, {
+            "item": "513",
+            "count": 1
+          }],
+          "smallest": "0",
+          "sum": "1260208"
+        },
+        "format": {
+          "precisionStyle": "standard",
+          "noCommas": "true",
+          "align": "right"
+        }
+      }, {
+        "id": 63977792,
+        "name": "STREETNAME",
+        "dataTypeName": "text",
+        "fieldName": "streetname",
+        "position": 17,
+        "renderTypeName": "text",
+        "tableColumnId": 3061857,
+        "width": 220,
+        "cachedContents": {
+          "non_null": 2273,
+          "largest": "WILLOW ST",
+          "null": 0,
+          "top": [{
+            "item": "MAIN ST",
+            "count": 20
+          }, {
+            "item": "VALENCIA ST",
+            "count": 19
+          }, {
+            "item": "BATTERY ST",
+            "count": 18
+          }, {
+            "item": "KAPLAN LN",
+            "count": 17
+          }, {
+            "item": "SANSOME ST",
+            "count": 16
+          }, {
+            "item": "DRUMM ST",
+            "count": 15
+          }, {
+            "item": "MISSION ST",
+            "count": 14
+          }, {
+            "item": "EMBARCADERO NORTH",
+            "count": 13
+          }, {
+            "item": "SPEAR ST",
+            "count": 12
+          }, {
+            "item": "WASHINGTON ST",
+            "count": 11
+          }, {
+            "item": "HYDE ST",
+            "count": 10
+          }, {
+            "item": "GRANT AVE",
+            "count": 9
+          }, {
+            "item": "11TH ST",
+            "count": 8
+          }, {
+            "item": "HOWARD ST",
+            "count": 7
+          }, {
+            "item": "GOLDEN GATE AVE",
+            "count": 6
+          }, {
+            "item": "05TH ST",
+            "count": 5
+          }, {
+            "item": "JESSIE ST",
+            "count": 4
+          }, {
+            "item": "02ND ST",
+            "count": 3
+          }, {
+            "item": "POLK ST",
+            "count": 2
+          }, {
+            "item": "HAWTHORNE ST",
+            "count": 1
+          }],
+          "smallest": "02ND ST"
+        },
+        "format": {}
+      }, {
+        "id": 63977793,
+        "name": "STREET_SEG",
+        "dataTypeName": "number",
+        "fieldName": "street_seg",
+        "position": 18,
+        "renderTypeName": "number",
+        "tableColumnId": 3061858,
+        "width": 220,
+        "cachedContents": {
+          "non_null": 2273,
+          "average": "7654963.688957325",
+          "largest": "13664000",
+          "null": 0,
+          "top": [{
+            "item": "8627000",
+            "count": 20
+          }, {
+            "item": "7741000",
+            "count": 19
+          }, {
+            "item": "11542000",
+            "count": 18
+          }, {
+            "item": "4972000",
+            "count": 17
+          }, {
+            "item": "8629000",
+            "count": 16
+          }, {
+            "item": "12044000",
+            "count": 15
+          }, {
+            "item": "7114000",
+            "count": 14
+          }, {
+            "item": "9085000",
+            "count": 13
+          }, {
+            "item": "7517000",
+            "count": 12
+          }, {
+            "item": "6809000",
+            "count": 11
+          }, {
+            "item": "2760000",
+            "count": 10
+          }, {
+            "item": "13405000",
+            "count": 9
+          }, {
+            "item": "13409000",
+            "count": 8
+          }, {
+            "item": "2767000",
+            "count": 7
+          }, {
+            "item": "4085000",
+            "count": 6
+          }, {
+            "item": "129000",
+            "count": 5
+          }, {
+            "item": "12166000",
+            "count": 4
+          }, {
+            "item": "12663000",
+            "count": 3
+          }, {
+            "item": "3293000",
+            "count": 2
+          }, {
+            "item": "135000",
+            "count": 1
+          }],
+          "smallest": "117000",
+          "sum": "17399732465"
+        },
+        "format": {
+          "precisionStyle": "standard",
+          "noCommas": "true",
+          "align": "right"
+        }
+      }, {
+        "id": 63977794,
+        "name": "Location",
+        "dataTypeName": "location",
+        "fieldName": "location",
+        "position": 19,
+        "renderTypeName": "location",
+        "tableColumnId": 3061859,
+        "width": 196,
+        "cachedContents": {
+          "non_null": 2273,
+          "largest": {
+            "latitude": "37.807964",
+            "longitude": "-122.409099"
+          },
+          "null": 0,
+          "top": [{
+            "item": {
+              "latitude": "37.780948",
+              "longitude": "-122.414006"
+            },
+            "count": 20
+          }, {
+            "item": {
+              "latitude": "37.780946",
+              "longitude": "-122.414019"
+            },
+            "count": 19
+          }, {
+            "item": {
+              "latitude": "37.785514",
+              "longitude": "-122.396894"
+            },
+            "count": 18
+          }, {
+            "item": {
+              "latitude": "37.783372",
+              "longitude": "-122.396175"
+            },
+            "count": 17
+          }, {
+            "item": {
+              "latitude": "37.780728",
+              "longitude": "-122.390221"
+            },
+            "count": 16
+          }, {
+            "item": {
+              "latitude": "37.807987",
+              "longitude": "-122.409103"
+            },
+            "count": 15
+          }, {
+            "item": {
+              "latitude": "37.78336",
+              "longitude": "-122.39619"
+            },
+            "count": 14
+          }, {
+            "item": {
+              "latitude": "37.785499",
+              "longitude": "-122.396913"
+            },
+            "count": 13
+          }, {
+            "item": {
+              "latitude": "37.763294",
+              "longitude": "-122.458251"
+            },
+            "count": 12
+          }, {
+            "item": {
+              "latitude": "37.763301",
+              "longitude": "-122.458228"
+            },
+            "count": 11
+          }, {
+            "item": {
+              "latitude": "37.763307",
+              "longitude": "-122.458206"
+            },
+            "count": 10
+          }, {
+            "item": {
+              "latitude": "37.780759",
+              "longitude": "-122.390183"
+            },
+            "count": 9
+          }, {
+            "item": {
+              "latitude": "37.780769",
+              "longitude": "-122.39017"
+            },
+            "count": 8
+          }, {
+            "item": {
+              "latitude": "37.807982",
+              "longitude": "-122.409102"
+            },
+            "count": 7
+          }, {
+            "item": {
+              "latitude": "37.783382",
+              "longitude": "-122.396162"
+            },
+            "count": 6
+          }, {
+            "item": {
+              "latitude": "37.784068",
+              "longitude": "-122.418627"
+            },
+            "count": 5
+          }, {
+            "item": {
+              "latitude": "37.807953",
+              "longitude": "-122.409097"
+            },
+            "count": 4
+          }, {
+            "item": {
+              "latitude": "37.807964",
+              "longitude": "-122.409099"
+            },
+            "count": 3
+          }],
+          "smallest": {
+            "latitude": "37.801541",
+            "longitude": "-122.401568"
+          }
+        },
+        "format": {},
+        "subColumnTypes": ["human_address", "latitude", "longitude", "machine_address", "needs_recoding"]
+      }],
+      "grants": [{
+        "inherited": false,
+        "type": "viewer",
+        "flags": ["public"]
+      }],
+      "license": {
+        "name": "Open Data Commons Public Domain Dedication and License",
+        "termsLink": "http://opendatacommons.org/licenses/pddl/1.0/"
+      },
+      "metadata": {
+        "rdfSubject": "0",
+        "rdfClass": "",
+        "attachments": [{
+          "filename": "MotorcycleMeters_20130412_Data_Dictionary.pdf",
+          "assetId": "",
+          "blobId": "68D1C811-72EF-4F29-8869-855FDEEC7F74",
+          "name": "MotorcycleMeters_20130412_Data_Dictionary.pdf"
+        }, {
+          "filename": "MotorcycleMeters_20130412_Shapefile.zip",
+          "assetId": "",
+          "blobId": "EE835A1F-2896-4C2A-AF0C-4DD238FBCF88",
+          "name": "MotorcycleMeters_20130412_Shapefile.zip"
+        }, {
+          "filename": "MotorcycleMeterDataPreviewMap_-_20130510.pdf",
+          "assetId": "",
+          "blobId": "B8E574B6-C3F2-49A5-A6D6-91F725FF2493",
+          "name": "MotorcycleMeterDataPreviewMap_-_20130412.pdf"
+        }],
+        "custom_fields": {
+          "Department Metrics": {
+            "Publishing Department": "Municipal Transportation Agency "
+          },
+          "Detailed Descriptive": {
+            "Geographic unit": "Latitude/longitude"
+          },
+          "Publishing Details": {
+            "Data change frequency": "As needed",
+            "Publishing frequency": "As needed"
+          }
+        },
+        "rowIdentifier": "post_id",
+        "availableDisplayTypes": ["table", "fatrow", "page"],
+        "rowLabel": "Row",
+        "renderTypeConfig": {
+          "visible": {
+            "table": true
+          }
+        }
+      },
+      "owner": {
+        "id": "zn8n-8wyr",
+        "displayName": "Leslie Bienenfeld",
+        "screenName": "Leslie Bienenfeld",
+        "type": "interactive"
+      },
+      "query": {},
+      "rights": ["read"],
+      "tableAuthor": {
+        "id": "zn8n-8wyr",
+        "displayName": "Leslie Bienenfeld",
+        "screenName": "Leslie Bienenfeld",
+        "type": "interactive"
+      },
+      "tags": ["sfmta", "sfpark", "motorcycles", "meters", "parking"],
+      "flags": ["default", "restorable", "restorePossibleForType"]
+    }
+  },
+  "data": [
+    [1, "A6AC4CDC-9ABD-45C1-A270-9CC8836B0B7E", 1, 1367924769, "401820", 1367924769, "401820", "{\n}", "1", "324-11041", "324-11040", "1", "Black", "MS", "N", "N", "SFMTA", "ON", "0", "MC3", " ", "1104", "BATTERY ST", "2767000", [null, "37.801541", "-122.401568", null, false]],
+    [2, "43AAE592-B6C9-4E1E-9DA3-0C38C617CD9D", 2, 1367924769, "401820", 1367924769, "401820", "{\n}", "2", "700-02250", "-", "0", "Black", "SS", "N", "N", "SFMTA", "ON", "0", "MC3", " ", "225", "VALENCIA ST", "13055000", [null, "37.769211", "-122.422194", null, false]],
+    [3, "8B1A9552-5CB4-472A-8E93-5DAE0F9A95B2", 3, 1367924769, "401820", 1367924769, "401820", "{\n}", "3", "830-05560", "-", "0", "Black", "SS", "Y", "N", "PORT", "ON", "0", "PortMC1", " ", "556", "EMBARCADERO NORTH", "12556102", [null, "37.80091", "-122.399398", null, false]],
+    [4, "A4B4F741-7197-4F3C-8059-8DF80450BD6E", 4, 1367924769, "401820", 1367924769, "401820", "{\n}", "4", "330-03300", "-", "0", "Black", "SS", "Y", "N", "SFMTA", "ON", "0", "MC5", "South Embarcadero", "330", "BRANNAN ST", "3075000", [null, "37.781456", "-122.392718", null, false]],
+    [5, "1A588CB1-D5FA-4F7B-B928-DEB4F9068861", 5, 1367924769, "401820", 1367924769, "401820", "{\n}", "5", "593-00031", "593-00030", "1", "Black", "MS", "N", "N", "SFMTA", "ON", "0", "MC5", "Downtown", "3", "OFARRELL ST", "9720000", [null, "37.786743", "-122.405087", null, false]],
+    [6, "D1DF8E83-A605-457B-A88F-B1CF366F80D8", 6, 1367924769, "401820", 1367924769, "401820", "{\n}", "6", "464-03241", "464-03240", "1", "Black", "MS", "N", "N", "SFMTA", "ON", "0", "MC5", "Civic Center", "324", "HAYES ST", "6815000", [null, "37.777044", "-122.422208", null, false]],
+    [7, "EBAFEADC-E728-4033-9BD4-833FB729F2A3", 7, 1367924769, "401820", 1367924769, "401820", "{\n}", "7", "462-18050", "-", "0", "Black", "SS", "N", "N", "SFMTA", "ON", "0", "MC3", " ", "1805", "HAIGHT ST", "6624000", [null, "37.769296", "-122.452025", null, false]],
+    [8, "FB0A7CEC-1C41-4BD3-8A2C-FFAF531CA240", 8, 1367924769, "401820", 1367924769, "401820", "{\n}", "8", "440-08401", "440-08400", "1", "Black", "MS", "N", "N", "SFMTA", "ON", "0", "MC3", " ", "840", "GEARY ST", "6116000", [null, "37.786209", "-122.417734", null, false]],
+    [9, "6F80B950-000C-43F1-8BC1-CAF9B8EE57C0", 9, 1367924769, "401820", 1367924769, "401820", "{\n}", "9", "209-04620", "-", "0", "Black", "SS", "N", "N", "SFMTA", "ON", "0", "MC3", " ", "462", "09TH ST", "458000", [null, "37.771378", "-122.408779", null, false]],
+    [10, "195BD330-526E-4FD3-8478-A89F9D5D0AB8", 10, 1367924769, "401820", 1367924769, "401820", "{\n}", "10", "440-38180", "-", "0", "Black", "SS", "N", "N", "SFMTA", "ON", "0", "MC3", " ", "3818", "GEARY BLVD", "6058201", [null, "37.781318", "-122.460687", null, false]],
+    [2270, "0C325977-1EE0-47DC-A7F1-51EDE947BDA5", 2270, 1367924770, "401820", 1367924770, "401820", "{\n}", "2270", "471-06372", "471-06370", "2", "Black", "MS", "N", "N", "SFMTA", "ON", "0", "MC5", "South Embarcadero", "637", "HARRISON ST", "6716000", [null, "37.783382", "-122.396162", null, false]],
+    [2271, "08FE0872-5150-4A2D-8C3A-719CA9E25848", 2271, 1367924770, "401820", 1367924770, "401820", "{\n}", "2271", "401-07250", "401-07001", "25", "Black", "MS", "N", "N", "SFMTA", "ON", "0", "MC3", " ", "725", "ELLIS ST", "5178000", [null, "37.784068", "-122.418627", null, false]],
+    [2272, "2A42582E-2810-47B9-BBF4-3F35C9DCE17A", 2272, 1367924770, "401820", 1367924770, "401820", "{\n}", "2272", "840-22270", "-", "0", "Black", "SS", "Y", "N", "PORT", "ON", "0", "PortMC1", " ", "2227", "GRANT AVE", "6418000", [null, "37.807953", "-122.409097", null, false]],
+    [2273, "0AF2D379-D53D-4E82-8D7A-FDE2A6F6117F", 2273, 1367924770, "401820", 1367924770, "401820", "{\n}", "2273", "840-22290", "-", "0", "Black", "SS", "Y", "N", "PORT", "ON", "0", "PortMC1", " ", "2229", "GRANT AVE", "6418000", [null, "37.807964", "-122.409099", null, false]]
+  ]
+}

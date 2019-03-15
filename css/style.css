@@ -7,3 +7,16 @@
 	stroke: #fff;
 	stroke-width: none;
 }
+
+.mem,
+.lm {
+	opacity: 0.4;
+}
+
+.mem {
+	fill: red;
+}
+
+.lm {
+	fill: blue;
+}
