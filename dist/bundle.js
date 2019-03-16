@@ -31574,19 +31574,61 @@ function ready(_ref) {
     return coordinates;
   }); //Map
 
-  svg.append('g').attr('class', 'precinct').selectAll('path').data(precincts.features).enter().append('path').attr('d', path); //Unmetered
+  svg.append('g').attr('class', 'precinct').selectAll('path').data(precincts.features).enter().append('path').attr('d', path);
+  var i = 0;
+  var num_metered_coordinates = metered_coordinates.length;
+  var t = d3__WEBPACK_IMPORTED_MODULE_0__["interval"](function () {
+    var d = metered_coordinates[i];
+    d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').append('circle').attr('r', 3.0).attr('class', 'metered').transition().duration(500).attr('cx', projection([d[1], d[0]])[0]).attr('cy', projection([d[1], d[0]])[1]);
+    i = i + 1;
 
-  d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').selectAll('unmetered').data(unmetered_coordinates).enter().append('circle').attr('r', 1.5).attr('class', 'unmetered').attr('cx', function (d) {
-    return projection([d[1], d[0]])[0];
-  }).attr('cy', function (d) {
-    return projection([d[1], d[0]])[1];
-  }); //Metered
+    if (i == num_metered_coordinates) {
+      t.stop();
+    }
+  }, 1);
+  var j = 0;
+  var num_unmetered_coordinates = unmetered_coordinates.length;
+  var t2 = d3__WEBPACK_IMPORTED_MODULE_0__["interval"](function () {
+    var du = unmetered_coordinates[j];
+    d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').append('circle').attr('r', 3.0).attr('class', 'unmetered').transition().duration(500).attr('cx', projection([du[1], du[0]])[0]).attr('cy', projection([du[1], du[0]])[1]);
+    j = j + 1;
 
-  d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').selectAll('metered').data(metered_coordinates).enter().append('circle').attr('r', 1.5).attr('class', 'metered').attr('cx', function (d) {
-    return projection([d[1], d[0]])[0];
-  }).attr('cy', function (d) {
-    return projection([d[1], d[0]])[1];
-  });
+    if (j == num_unmetered_coordinates) {
+      t2.stop();
+    }
+  }, 1); // for (var i = 0; i < m && --n >= 0; ++i) {
+  //   var circle = newCircle(k);
+  //   svg.append("circle")
+  //     .attr("cx", circle[0])
+  //     .attr("cy", circle[1])
+  //     .attr("r", 0)
+  //     .style("fill-opacity", (Math.random() + .5) / 2)
+  //     .transition()
+  //     .attr("r", circle[2]);
+  //   // As we add more circles, generate more candidates per circle.
+  //   // Since this takes more effort, gradually reduce circles per frame.
+  //   if (k < 500) k *= 1.01, m *= .998;
+  // }
+  //Unmetered
+  // d3.select('g')
+  //   .selectAll('unmetered')
+  //   .data(unmetered_coordinates)
+  //   .enter()
+  //   .append('circle')
+  //   .attr('r', 1.5)
+  //   .attr('class', 'unmetered')
+  //   .attr('cx', (d) => projection([d[1], d[0]])[0])
+  //   .attr('cy', (d) => projection([d[1], d[0]])[1]);
+  //Metered
+  // d3.select('g')
+  //   .selectAll('metered')
+  //   .data(metered_coordinates)
+  //   .enter()
+  //   .append('circle')
+  //   .attr('r', 1.5)
+  //   .attr('class', 'metered')
+  //   .attr('cx', (d) => projection([d[1], d[0]])[0])
+  //   .attr('cy', (d) => projection([d[1], d[0]])[1]);
 }
 
 /***/ }),
