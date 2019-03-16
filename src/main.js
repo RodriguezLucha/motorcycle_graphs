@@ -64,12 +64,17 @@ function ready([sf, metered, unmetered]) {
 
     d3.select('g')
       .append('circle')
-      .attr('r', 3.0)
+      .attr('cx', Math.floor(Math.random() * 1100) -550)
+      .attr('cy', -550)
+      .attr('r', 5.0)
       .attr('class', 'metered')
       .transition()
       .duration(500)
       .attr('cx', projection([d[1], d[0]])[0])
-      .attr('cy', projection([d[1], d[0]])[1]);
+      .attr('cy', projection([d[1], d[0]])[1])
+      .transition()
+      .duration(1000)
+      .attr('r', 3.0);
 
     i = i + 1;
 
@@ -86,12 +91,17 @@ function ready([sf, metered, unmetered]) {
 
     d3.select('g')
       .append('circle')
-      .attr('r', 3.0)
+      .attr('cx', Math.floor(Math.random() * 1100) - 550)
+      .attr('cy', -550)
+      .attr('r', 5.0)
       .attr('class', 'unmetered')
       .transition()
       .duration(500)
       .attr('cx', projection([du[1], du[0]])[0])
-      .attr('cy', projection([du[1], du[0]])[1]);
+      .attr('cy', projection([du[1], du[0]])[1])
+      .transition()
+      .duration(1000)
+      .attr('r', 3.0);
 
     j = j + 1;
 
