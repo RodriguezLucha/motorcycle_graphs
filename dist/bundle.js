@@ -31530,6 +31530,7 @@ function sphericalTriangleArea(t) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
 /* harmony import */ var topojson__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! topojson */ "./node_modules/topojson/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -31540,34 +31541,75 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var svg = d3__WEBPACK_IMPORTED_MODULE_0__["select"]('svg'),
     height = +svg.attr('height'),
     width = +svg.attr('width');
 var projection = d3__WEBPACK_IMPORTED_MODULE_0__["geoMercator"]().center([-122.433701, 37.767683]).scale(211000).translate([width / 2, height / 2]);
 var path = d3__WEBPACK_IMPORTED_MODULE_0__["geoPath"]().projection(projection);
-var promises = [d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/sf.json'), d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/metered.json'), d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/unmetered.json')];
+var promises = [d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/sf.json'), d3__WEBPACK_IMPORTED_MODULE_0__["csv"]('data/metered.csv'), d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/unmetered.json')];
 Promise.all(promises).then(ready);
 
 function ready(_ref) {
-  var _ref2 = _slicedToArray(_ref, 2),
+  var _ref2 = _slicedToArray(_ref, 3),
       sf = _ref2[0],
-      metered = _ref2[1];
+      metered = _ref2[1],
+      unmetered = _ref2[2];
 
-  var metered_coordinates = metered.data.map(function (e) {
-    var gps = e[24];
+  var metered_coordinates = metered.map(function (e) {
+    var gpsStr = e['Location'];
+    var gps = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["parseGeoString"])(gpsStr);
+    var lat = gps[0];
+    var lng = gps[1];
+    var coordinates = [lat, lng];
+    return coordinates;
+  });
+  var unmetered_coordinates = unmetered.features.map(function (e) {
+    var gps = e.geometry.coordinates;
     var lat = gps[1];
-    var lng = gps[2];
-    var coordinates = [+lat, +lng];
+    var lng = gps[0];
+    var coordinates = [lat, lng];
     return coordinates;
   });
   var precincts = topojson__WEBPACK_IMPORTED_MODULE_1__["feature"](sf, sf.objects.precinct);
   svg.append('g').attr('class', 'precinct').selectAll('path').data(precincts.features).enter().append('path').attr('d', path);
-  d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').selectAll('circle').data(metered_coordinates).enter().append('circle').attr('r', 3.5).attr('class', 'lm').attr('cx', function (d) {
+  d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').selectAll('circle').data(metered_coordinates).enter().append('circle').attr('r', 1.5).attr('class', 'metered').attr('cx', function (d) {
+    return projection([d[1], d[0]])[0];
+  }).attr('cy', function (d) {
+    return projection([d[1], d[0]])[1];
+  });
+  d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').selectAll('circle').data(unmetered_coordinates).enter().append('circle').attr('r', 1.5).attr('class', 'unmetered').attr('cx', function (d) {
     return projection([d[1], d[0]])[0];
   }).attr('cy', function (d) {
     return projection([d[1], d[0]])[1];
   });
 }
+
+/***/ }),
+
+/***/ "./src/utils.js":
+/*!**********************!*\
+  !*** ./src/utils.js ***!
+  \**********************/
+/*! exports provided: parseGeoString */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseGeoString", function() { return parseGeoString; });
+//Input:  "(37.801541, -122.401568)"
+//Output:  [37.801541, -122.401568]
+var parseGeoString = function parseGeoString(input) {
+  var substr = input.slice(input.indexOf('(') + 1, input.indexOf(')'));
+  var coordinates = substr.split(', ');
+  coordinates = coordinates.map(function (e) {
+    return e.split(' ');
+  });
+  coordinates = coordinates.map(function (e) {
+    return +e;
+  });
+  return coordinates;
+};
 
 /***/ })
 

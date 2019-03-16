@@ -8,15 +8,10 @@
 	stroke-width: none;
 }
 
-.mem,
-.lm {
-	opacity: 0.4;
-}
-
-.mem {
+.unmetered {
 	fill: red;
 }
 
-.lm {
+.metered {
 	fill: blue;
 }
