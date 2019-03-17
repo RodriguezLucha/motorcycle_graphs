@@ -31608,8 +31608,8 @@ function ready(_ref) {
       unmetered_coordinates = _extractLatitudeAndLo2[1];
 
   Object(_map__WEBPACK_IMPORTED_MODULE_3__["drawMap"])(svg, precincts, path);
-  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawMetered"])(metered_coordinates, projection, true);
-  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawUnmetered"])(unmetered_coordinates, projection, true);
+  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawMetered"])(metered_coordinates, projection);
+  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawUnmetered"])(unmetered_coordinates, projection);
   Object(_legend__WEBPACK_IMPORTED_MODULE_5__["drawLegend"])();
 }
 

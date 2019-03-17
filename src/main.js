@@ -25,7 +25,6 @@ let promises = [
 Promise.all(promises).then(ready);
 
 function ready([sf, metered, unmetered]) {
-
   //Load map data
   let precincts = topojson.feature(sf, sf.objects.precinct);
 
@@ -33,7 +32,7 @@ function ready([sf, metered, unmetered]) {
   let [metered_coordinates, unmetered_coordinates] = extractLatitudeAndLongitutes(metered, unmetered);
 
   drawMap(svg, precincts, path);
-  drawMetered(metered_coordinates, projection, true);
-  drawUnmetered(unmetered_coordinates, projection, true);
+  drawMetered(metered_coordinates, projection);
+  drawUnmetered(unmetered_coordinates, projection);
   drawLegend();
 }
