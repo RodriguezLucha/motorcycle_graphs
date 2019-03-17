@@ -3,7 +3,6 @@ import * as topojson from 'topojson';
 import {extractLatitudeAndLongitutes} from './utils';
 import {drawMap} from './map';
 import {drawMetered, drawUnmetered} from './parking_spots';
-import {drawLegend} from './legend';
 import getProjection from './projection';
 
 

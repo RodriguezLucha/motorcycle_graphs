@@ -1,0 +1,28 @@
+.legend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.legend div {
+  margin: 10px;
+}
+
+.legend > .label {
+  font-size: 2em;
+}
+
+.circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 25px;
+}
+
+.unmetered {
+  background-color: greenyellow;
+}
+
+.metered {
+  background-color: blue;
+}

@@ -7,8 +7,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Motorcycle Parking in SF</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
-<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/legend.css">
   <link rel="stylesheet" href="css/map.css">
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <script src="https://d3js.org/topojson.v3.min.js"></script>
@@ -22,19 +25,38 @@
     </h1>
   </div>
 
-  <div class="map_left">Map Left</div>
+  <div class="legend">
+    <div class="circle metered"></div>
+    <div class="label">Unmetered</div>
+    <div class="circle unmetered"></div>
+    <div class="label">Metered</div>
+  </div>
+  <div class="map_left"></div>
 
   <div class="map_center">
     <img src="" alt="">
-      <svg></svg>
+    <svg></svg>
     </img>
   </div>
 
-  <div class="map_right">Map Right</div>
+  <div class="map_right"></div>
 
-  <div class="legend">Legend</div>
 
-  <div class="footer">Footer</div>
+  <div class="footer">
+    <div class="source">
+      Source: The San Francisco Municipal Transportation Agency 
+      <a href="">(SFMTA)</a>
+      
+    </div>
+    <div class="my_links">
+      <a class="github" href="https://github.com/RodriguezLucha/motorcycle_graphs" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+      <a class="linkedin" href="https://www.linkedin.com/in/rudy-rodriguez-11424020/" target="_blank">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </div>
+  </div>
 
   <script src="dist/bundle.js"></script>
 </body>

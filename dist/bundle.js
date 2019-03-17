@@ -31519,40 +31519,6 @@ function sphericalTriangleArea(t) {
 
 /***/ }),
 
-/***/ "./src/legend.js":
-/*!***********************!*\
-  !*** ./src/legend.js ***!
-  \***********************/
-/*! exports provided: drawLegend */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "drawLegend", function() { return drawLegend; });
-/* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
-
-var drawLegend = function drawLegend() {
-  var parkings = [{
-    name: 'Metered',
-    class: 'metered',
-    x_pos: 83
-  }, {
-    name: 'Unmetered',
-    class: 'unmetered',
-    x_pos: 100
-  }];
-  var legend = d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').attr('x', 100).attr('y', 100);
-  parkings.forEach(function (parking, i) {
-    var x_position = -400;
-    var y_position = i * 40 - 500;
-    var legendRow = legend.append('g').attr('transform', "translate(".concat(x_position, ", ").concat(y_position, ")"));
-    legendRow.append('text').attr('x', parking.x_pos).attr('y', 5).attr('text-anchor', 'end').text(parking.name);
-    legendRow.append('circle').attr('r', 16).attr('class', parking.class);
-  });
-};
-
-/***/ }),
-
 /***/ "./src/main.js":
 /*!*********************!*\
   !*** ./src/main.js ***!
@@ -31567,8 +31533,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
 /* harmony import */ var _map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./map */ "./src/map.js");
 /* harmony import */ var _parking_spots__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parking_spots */ "./src/parking_spots.js");
-/* harmony import */ var _legend__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./legend */ "./src/legend.js");
-/* harmony import */ var _projection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./projection */ "./src/projection.js");
+/* harmony import */ var _projection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./projection */ "./src/projection.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -31583,12 +31548,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var svg = d3__WEBPACK_IMPORTED_MODULE_0__["select"]('svg'),
     height = +svg.attr('height'),
     width = +svg.attr('width');
 svg.attr('viewBox', '-550 -550 1100 1000');
-var projection = Object(_projection__WEBPACK_IMPORTED_MODULE_6__["default"])(width, height);
+var projection = Object(_projection__WEBPACK_IMPORTED_MODULE_5__["default"])(width, height);
 var path = d3__WEBPACK_IMPORTED_MODULE_0__["geoPath"]().projection(projection);
 var promises = [d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/sf.json'), d3__WEBPACK_IMPORTED_MODULE_0__["csv"]('data/metered.csv'), d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/unmetered.json')];
 Promise.all(promises).then(ready).then(callThis);
