@@ -31519,6 +31519,40 @@ function sphericalTriangleArea(t) {
 
 /***/ }),
 
+/***/ "./src/legend.js":
+/*!***********************!*\
+  !*** ./src/legend.js ***!
+  \***********************/
+/*! exports provided: drawLegend */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "drawLegend", function() { return drawLegend; });
+/* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
+
+var drawLegend = function drawLegend() {
+  var parkings = [{
+    name: 'Metered',
+    class: 'metered',
+    x_pos: 83
+  }, {
+    name: 'Unmetered',
+    class: 'unmetered',
+    x_pos: 100
+  }];
+  var legend = d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').attr('x', 100).attr('y', 100);
+  parkings.forEach(function (parking, i) {
+    var x_position = -400;
+    var y_position = i * 40 - 500;
+    var legendRow = legend.append('g').attr('transform', "translate(".concat(x_position, ", ").concat(y_position, ")"));
+    legendRow.append('text').attr('x', parking.x_pos).attr('y', 5).attr('text-anchor', 'end').text(parking.name);
+    legendRow.append('circle').attr('r', 16).attr('class', parking.class);
+  });
+};
+
+/***/ }),
+
 /***/ "./src/main.js":
 /*!*********************!*\
   !*** ./src/main.js ***!
@@ -31531,6 +31565,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
 /* harmony import */ var topojson__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! topojson */ "./node_modules/topojson/index.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
+/* harmony import */ var _map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./map */ "./src/map.js");
+/* harmony import */ var _parking_spots__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parking_spots */ "./src/parking_spots.js");
+/* harmony import */ var _legend__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./legend */ "./src/legend.js");
+/* harmony import */ var _projection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./projection */ "./src/projection.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -31542,11 +31580,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
+
 var svg = d3__WEBPACK_IMPORTED_MODULE_0__["select"]('svg'),
     height = +svg.attr('height'),
     width = +svg.attr('width');
 svg.attr('viewBox', '-550 -550 1100 1000');
-var projection = d3__WEBPACK_IMPORTED_MODULE_0__["geoMercator"]().center([-122.433701, 37.767683]).scale(291000).translate([width / 2, height / 2]);
+var projection = Object(_projection__WEBPACK_IMPORTED_MODULE_6__["default"])(width, height);
 var path = d3__WEBPACK_IMPORTED_MODULE_0__["geoPath"]().projection(projection);
 var promises = [d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/sf.json'), d3__WEBPACK_IMPORTED_MODULE_0__["csv"]('data/metered.csv'), d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/unmetered.json')];
 Promise.all(promises).then(ready);
@@ -31557,79 +31599,106 @@ function ready(_ref) {
       metered = _ref2[1],
       unmetered = _ref2[2];
 
-  var precincts = topojson__WEBPACK_IMPORTED_MODULE_1__["feature"](sf, sf.objects.precinct);
-  var metered_coordinates = metered.map(function (e) {
-    var gpsStr = e['Location'];
-    var gps = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["parseGeoString"])(gpsStr);
-    var lat = gps[0];
-    var lng = gps[1];
-    var coordinates = [lat, lng];
-    return coordinates;
-  });
-  var unmetered_coordinates = unmetered.features.map(function (e) {
-    var gps = e.geometry.coordinates;
-    var lat = gps[1];
-    var lng = gps[0];
-    var coordinates = [lat, lng];
-    return coordinates;
-  }); //Map
+  //Load map data
+  var precincts = topojson__WEBPACK_IMPORTED_MODULE_1__["feature"](sf, sf.objects.precinct); //Load parking spot data
 
+  var _extractLatitudeAndLo = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["extractLatitudeAndLongitutes"])(metered, unmetered),
+      _extractLatitudeAndLo2 = _slicedToArray(_extractLatitudeAndLo, 2),
+      metered_coordinates = _extractLatitudeAndLo2[0],
+      unmetered_coordinates = _extractLatitudeAndLo2[1];
+
+  Object(_map__WEBPACK_IMPORTED_MODULE_3__["drawMap"])(svg, precincts, path);
+  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawMetered"])(metered_coordinates, projection, true);
+  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawUnmetered"])(unmetered_coordinates, projection, true);
+  Object(_legend__WEBPACK_IMPORTED_MODULE_5__["drawLegend"])();
+}
+
+/***/ }),
+
+/***/ "./src/map.js":
+/*!********************!*\
+  !*** ./src/map.js ***!
+  \********************/
+/*! exports provided: drawMap */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "drawMap", function() { return drawMap; });
+var drawMap = function drawMap(svg, precincts, path) {
   svg.append('g').attr('class', 'precinct').selectAll('path').data(precincts.features).enter().append('path').attr('d', path);
-  var i = 0;
-  var num_metered_coordinates = metered_coordinates.length;
-  var t = d3__WEBPACK_IMPORTED_MODULE_0__["interval"](function () {
-    var d = metered_coordinates[i];
-    d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').append('circle').attr('cx', Math.floor(Math.random() * 1100) - 550).attr('cy', -550).attr('r', 5.0).attr('class', 'metered').transition().duration(500).attr('cx', projection([d[1], d[0]])[0]).attr('cy', projection([d[1], d[0]])[1]).transition().duration(1000).attr('r', 3.0);
-    i = i + 1;
+};
 
-    if (i == num_metered_coordinates) {
+/***/ }),
+
+/***/ "./src/parking_spots.js":
+/*!******************************!*\
+  !*** ./src/parking_spots.js ***!
+  \******************************/
+/*! exports provided: drawMetered, drawUnmetered */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "drawMetered", function() { return drawMetered; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "drawUnmetered", function() { return drawUnmetered; });
+/* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
+
+var drawMetered = function drawMetered(metered_coordinates, projection) {
+  var stop_early = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var counter = 0;
+  var total = metered_coordinates.length;
+
+  if (stop_early) {
+    total = 10;
+  }
+
+  var t = d3__WEBPACK_IMPORTED_MODULE_0__["interval"](function () {
+    var d = metered_coordinates[counter];
+    d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').append('circle').attr('r', 5.0).attr('class', 'metered').transition().duration(500).attr('cx', projection([d[1], d[0]])[0]).attr('cy', projection([d[1], d[0]])[1]).transition().duration(1000).attr('r', 3.0);
+    counter = counter + 1;
+
+    if (counter == total) {
       t.stop();
     }
   }, 1);
+};
+var drawUnmetered = function drawUnmetered(unmetered_coordinates, projection) {
+  var stop_early = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var j = 0;
-  var num_unmetered_coordinates = unmetered_coordinates.length;
+  var total = unmetered_coordinates.length;
+
+  if (stop_early) {
+    total = 10;
+  }
+
   var t2 = d3__WEBPACK_IMPORTED_MODULE_0__["interval"](function () {
     var du = unmetered_coordinates[j];
-    d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').append('circle').attr('cx', Math.floor(Math.random() * 1100) - 550).attr('cy', -550).attr('r', 5.0).attr('class', 'unmetered').transition().duration(500).attr('cx', projection([du[1], du[0]])[0]).attr('cy', projection([du[1], du[0]])[1]).transition().duration(1000).attr('r', 3.0);
+    d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').append('circle').attr('r', 5.0).transition().duration(500).attr('class', 'unmetered').attr('cx', projection([du[1], du[0]])[0]).attr('cy', projection([du[1], du[0]])[1]).transition().duration(1000).attr('r', 3.0);
     j = j + 1;
 
-    if (j == num_unmetered_coordinates) {
+    if (j === total) {
       t2.stop();
     }
-  }, 1); // for (var i = 0; i < m && --n >= 0; ++i) {
-  //   var circle = newCircle(k);
-  //   svg.append("circle")
-  //     .attr("cx", circle[0])
-  //     .attr("cy", circle[1])
-  //     .attr("r", 0)
-  //     .style("fill-opacity", (Math.random() + .5) / 2)
-  //     .transition()
-  //     .attr("r", circle[2]);
-  //   // As we add more circles, generate more candidates per circle.
-  //   // Since this takes more effort, gradually reduce circles per frame.
-  //   if (k < 500) k *= 1.01, m *= .998;
-  // }
-  //Unmetered
-  // d3.select('g')
-  //   .selectAll('unmetered')
-  //   .data(unmetered_coordinates)
-  //   .enter()
-  //   .append('circle')
-  //   .attr('r', 1.5)
-  //   .attr('class', 'unmetered')
-  //   .attr('cx', (d) => projection([d[1], d[0]])[0])
-  //   .attr('cy', (d) => projection([d[1], d[0]])[1]);
-  //Metered
-  // d3.select('g')
-  //   .selectAll('metered')
-  //   .data(metered_coordinates)
-  //   .enter()
-  //   .append('circle')
-  //   .attr('r', 1.5)
-  //   .attr('class', 'metered')
-  //   .attr('cx', (d) => projection([d[1], d[0]])[0])
-  //   .attr('cy', (d) => projection([d[1], d[0]])[1]);
-}
+  }, 1);
+};
+
+/***/ }),
+
+/***/ "./src/projection.js":
+/*!***************************!*\
+  !*** ./src/projection.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
+
+/* harmony default export */ __webpack_exports__["default"] = (function (width, height) {
+  return d3__WEBPACK_IMPORTED_MODULE_0__["geoMercator"]().center([-122.433701, 37.767683]).scale(291000).translate([width / 2, height / 2]);
+});
 
 /***/ }),
 
@@ -31637,12 +31706,13 @@ function ready(_ref) {
 /*!**********************!*\
   !*** ./src/utils.js ***!
   \**********************/
-/*! exports provided: parseGeoString */
+/*! exports provided: parseGeoString, extractLatitudeAndLongitutes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseGeoString", function() { return parseGeoString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "extractLatitudeAndLongitutes", function() { return extractLatitudeAndLongitutes; });
 //Input:  "(37.801541, -122.401568)"
 //Output:  [37.801541, -122.401568]
 var parseGeoString = function parseGeoString(input) {
@@ -31655,6 +31725,24 @@ var parseGeoString = function parseGeoString(input) {
     return +e;
   });
   return coordinates;
+};
+var extractLatitudeAndLongitutes = function extractLatitudeAndLongitutes(metered, unmetered) {
+  var metered_coordinates = metered.map(function (e) {
+    var gpsStr = e['Location'];
+    var gps = parseGeoString(gpsStr);
+    var lat = gps[0];
+    var lng = gps[1];
+    var coordinates = [lat, lng];
+    return coordinates;
+  });
+  var unmetered_coordinates = unmetered.features.map(function (e) {
+    var gps = e.geometry.coordinates;
+    var lat = gps[1];
+    var lng = gps[0];
+    var coordinates = [lat, lng];
+    return coordinates;
+  });
+  return [metered_coordinates, unmetered_coordinates];
 };
 
 /***/ })

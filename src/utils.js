@@ -9,3 +9,25 @@ export const parseGeoString = (input) => {
   coordinates = coordinates.map(e => +e);
   return coordinates;
 };
+
+
+export const extractLatitudeAndLongitutes = (metered, unmetered) => {
+  let metered_coordinates = metered.map(e => {
+    let gpsStr = e['Location'];
+    let gps = parseGeoString(gpsStr);
+    let lat = gps[0];
+    let lng = gps[1];
+    let coordinates = [lat, lng];
+    return coordinates;
+  });
+
+  let unmetered_coordinates = unmetered.features.map(e => {
+    let gps = e.geometry.coordinates;
+    let lat = gps[1];
+    let lng = gps[0];
+    let coordinates = [lat, lng];
+    return coordinates;
+  });
+
+  return [metered_coordinates, unmetered_coordinates];
+};
