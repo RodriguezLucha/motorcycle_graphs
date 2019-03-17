@@ -1,11 +1,5 @@
 .precinct {
-  fill: #555;
-}
-
-.precinct-boundary {
-  fill: none;
-  stroke: #fff;
-  stroke-width: none;
+  fill: rgb(55, 55, 55);
 }
 
 .unmetered {

@@ -16,7 +16,8 @@ body {
 svg {
   height: 100vh;
   width: calc(100vh * 1.1);
-  background-color: lightblue;
+  background-color: #0077B5;
+  border-radius: 4px;
 }
 
 .header {

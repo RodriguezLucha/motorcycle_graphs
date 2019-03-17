@@ -31573,10 +31573,7 @@ function ready(_ref) {
 
   Object(_map__WEBPACK_IMPORTED_MODULE_3__["drawMap"])(svg, precincts, path);
   Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawMetered"])(metered_coordinates, projection);
-  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawUnmetered"])(unmetered_coordinates, projection); // drawLegend();
-}
-
-function callThis() {//window.dispatchEvent(new Event('resize'));
+  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawUnmetered"])(unmetered_coordinates, projection);
 }
 
 /***/ }),

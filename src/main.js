@@ -33,9 +33,4 @@ function ready([sf, metered, unmetered]) {
   drawMap(svg, precincts, path);
   drawMetered(metered_coordinates, projection);
   drawUnmetered(unmetered_coordinates, projection);
-  // drawLegend();
-}
-
-function callThis(){
-  //window.dispatchEvent(new Event('resize'));
 }
