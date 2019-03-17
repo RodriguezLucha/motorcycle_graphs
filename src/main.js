@@ -22,7 +22,7 @@ let promises = [
   d3.json('data/unmetered.json'),
 ];
 
-Promise.all(promises).then(ready);
+Promise.all(promises).then(ready).then(callThis);
 
 function ready([sf, metered, unmetered]) {
   //Load map data
@@ -34,5 +34,9 @@ function ready([sf, metered, unmetered]) {
   drawMap(svg, precincts, path);
   drawMetered(metered_coordinates, projection);
   drawUnmetered(unmetered_coordinates, projection);
-  drawLegend();
+  // drawLegend();
+}
+
+function callThis(){
+  //window.dispatchEvent(new Event('resize'));
 }

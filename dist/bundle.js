@@ -31591,7 +31591,7 @@ svg.attr('viewBox', '-550 -550 1100 1000');
 var projection = Object(_projection__WEBPACK_IMPORTED_MODULE_6__["default"])(width, height);
 var path = d3__WEBPACK_IMPORTED_MODULE_0__["geoPath"]().projection(projection);
 var promises = [d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/sf.json'), d3__WEBPACK_IMPORTED_MODULE_0__["csv"]('data/metered.csv'), d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/unmetered.json')];
-Promise.all(promises).then(ready);
+Promise.all(promises).then(ready).then(callThis);
 
 function ready(_ref) {
   var _ref2 = _slicedToArray(_ref, 3),
@@ -31609,8 +31609,10 @@ function ready(_ref) {
 
   Object(_map__WEBPACK_IMPORTED_MODULE_3__["drawMap"])(svg, precincts, path);
   Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawMetered"])(metered_coordinates, projection);
-  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawUnmetered"])(unmetered_coordinates, projection);
-  Object(_legend__WEBPACK_IMPORTED_MODULE_5__["drawLegend"])();
+  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawUnmetered"])(unmetered_coordinates, projection); // drawLegend();
+}
+
+function callThis() {//window.dispatchEvent(new Event('resize'));
 }
 
 /***/ }),

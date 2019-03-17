@@ -1,4 +1,8 @@
 
+.map {
+  grid-area: map;
+}
+
 body {
   display: grid;
   grid-template-areas: 
@@ -9,27 +13,19 @@ body {
   grid-template-columns: 1fr auto 1fr;
 }
 
-.map {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
 svg {
-  position: relative;
   height: 100vh;
-  width: auto;
-  /* top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0; */
-
+  width: calc(100vh * 1.1);
   background-color: lightblue;
 }
 
 .header {
   grid-area: header;
   background-color: pink;
+  font-size: 3em;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Libre Baskerville',serif;
 }
 
 .legend {
@@ -39,10 +35,12 @@ svg {
 
 .map_left {
   grid-area: map_left;
+  text-align: center;
 }
 
 .map_right {
   grid-area: map_right;
+  text-align: center;
 }
 .footer {
   grid-area: footer;
