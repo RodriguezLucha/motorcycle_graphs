@@ -59,5 +59,5 @@ export const drawUnmetered = (unmetered_coordinates, projection, stop_early = fa
     if (j === total) {
       t2.stop();
     }
-  }, 1);
+  }, 200);
 };

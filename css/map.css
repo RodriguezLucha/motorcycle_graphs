@@ -1,11 +1,12 @@
 .precinct {
-  fill: rgb(55, 55, 55);
+  fill: rgb(52, 52, 52);
 }
 
 .unmetered {
-  fill: greenyellow;
+  fill: rgb(22, 255, 57);
 }
 
 .metered {
-  fill: blue;
+  fill: black;
+  /* fill: rgb(0, 57, 245); */
 }

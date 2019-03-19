@@ -31643,7 +31643,7 @@ var drawUnmetered = function drawUnmetered(unmetered_coordinates, projection) {
     if (j === total) {
       t2.stop();
     }
-  }, 1);
+  }, 200);
 };
 
 /***/ }),
