@@ -21,8 +21,10 @@
 
 .unmetered {
   background-color: greenyellow;
+  border: solid;
 }
 
 .metered {
-  background-color: black;
+  background-color: white;
+  border: solid;
 }

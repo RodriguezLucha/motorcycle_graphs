@@ -1,4 +1,4 @@
-
+const titleCase = require('title-case');
 
 //Input:  "(37.801541, -122.401568)"
 //Output:  [37.801541, -122.401568]
@@ -11,20 +11,19 @@ export const parseGeoString = (input) => {
 };
 
 
-export const extractLatitudeAndLongitutes = (metered, unmetered) => {
+export const extractData = (metered, unmetered) => {
   let metered_coordinates = metered.map(e => {
     let gpsStr = e['Location'];
     let gps = parseGeoString(gpsStr);
     let lat = gps[0];
     let lng = gps[1];
-    let coordinates = [lat, lng];
 
     let result = {
       coordinates : {
         latitude : lat,
         longitude : lng
       },
-      address: `${e['STREETNAME']} ${e['STREET_NUM']}`
+      address: titleCase(`${e['STREETNAME']} ${e['STREET_NUM']}`)
     };
     
     return result;
@@ -34,8 +33,14 @@ export const extractLatitudeAndLongitutes = (metered, unmetered) => {
     let gps = e.geometry.coordinates;
     let lat = gps[1];
     let lng = gps[0];
-    let coordinates = [lat, lng];
-    return coordinates;
+    let result = {
+      coordinates: {
+        latitude: lat,
+        longitude: lng
+      },
+      address: titleCase(`${e.properties.street}`)
+    };
+    return result;
   });
 
   return [metered_coordinates, unmetered_coordinates];

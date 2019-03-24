@@ -1,10 +1,12 @@
 import * as d3 from 'd3';
 
+const debugTotal = 10;
+
 export const drawMetered = (metered_coordinates, projection, tip, stop_early = false) => {
   let counter = 0;
   let total = metered_coordinates.length;
   if (stop_early) {
-    total = 3;
+    total = debugTotal;
   }
 
   let t = d3.interval(() => {
@@ -18,13 +20,6 @@ export const drawMetered = (metered_coordinates, projection, tip, stop_early = f
 
     let coord_array = [d.coordinates.longitude, d.coordinates.latitude];
 
-    console.log('Outer this', this);
-
-    const mouseOverFunction = () => {
-      console.log('Inner this', this);
-      tip.show();
-    };
-
     d3.select('g')
       .append('circle')
       .datum(d)
@@ -32,21 +27,9 @@ export const drawMetered = (metered_coordinates, projection, tip, stop_early = f
         d3.select(this)
           .transition()
           .duration(100)
-          .attr('r', 10);
+          .attr('r', 4);
         tip.show(d, this);
       })
-
-
-    //.on('mouseover', mouseOverFunction)
-    // .on('mouseover', function (d) {
-    //   d3.select(this)
-    //     .transition()
-    //     .duration(1000)
-    //     .attr('r', 10);
-    //   tip.show(d);
-    // })
-    //.on('mouseover', tip.show)
-    // .on('mouseout', tip.hide)
 
       .on('mouseout', function (d) {
         d3.select(this)
@@ -74,20 +57,38 @@ export const drawUnmetered = (unmetered_coordinates, projection, tip, stop_early
   let total = unmetered_coordinates.length;
 
   if (stop_early) {
-    total = 10;
+    total = debugTotal;
   }
 
   let t2 = d3.interval(() => {
     let du = unmetered_coordinates[j];
 
+    let coord_array = [du.coordinates.longitude, du.coordinates.latitude];
+
     d3.select('g')
       .append('circle')
+      .datum(du)
+      .on('mouseover', function (d) {
+        d3.select(this)
+          .transition()
+          .duration(100)
+          .attr('r', 4);
+        tip.show(d, this);
+      })
+
+      .on('mouseout', function (d) {
+        d3.select(this)
+          .transition()
+          .duration(100)
+          .attr('r', 3);
+        tip.hide(d, this);
+      })
       .attr('r', 5.0)
       .transition()
       .duration(500)
       .attr('class', 'unmetered')
-      .attr('cx', projection([du[1], du[0]])[0])
-      .attr('cy', projection([du[1], du[0]])[1])
+      .attr('cx', projection(coord_array)[0])
+      .attr('cy', projection(coord_array)[1])
       .transition()
       .duration(1000)
       .attr('r', 3.0);
