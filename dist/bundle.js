@@ -24806,6 +24806,352 @@ function sleep(time) {
 
 /***/ }),
 
+/***/ "./node_modules/d3-tip/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/d3-tip/index.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var d3_collection__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3-collection */ "./node_modules/d3-collection/src/index.js");
+/* harmony import */ var d3_selection__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-selection */ "./node_modules/d3-selection/src/index.js");
+/**
+ * d3.tip
+ * Copyright (c) 2013-2017 Justin Palmer
+ *
+ * Tooltips for d3.js SVG visualizations
+ */
+// eslint-disable-next-line no-extra-semi
+
+
+// Public - constructs a new tooltip
+//
+// Returns a tip
+/* harmony default export */ __webpack_exports__["default"] = (function() {
+  var direction   = d3TipDirection,
+      offset      = d3TipOffset,
+      html        = d3TipHTML,
+      rootElement = document.body,
+      node        = initNode(),
+      svg         = null,
+      point       = null,
+      target      = null
+
+  function tip(vis) {
+    svg = getSVGNode(vis)
+    if (!svg) return
+    point = svg.createSVGPoint()
+    rootElement.appendChild(node)
+  }
+
+  // Public - show the tooltip on the screen
+  //
+  // Returns a tip
+  tip.show = function() {
+    var args = Array.prototype.slice.call(arguments)
+    if (args[args.length - 1] instanceof SVGElement) target = args.pop()
+
+    var content = html.apply(this, args),
+        poffset = offset.apply(this, args),
+        dir     = direction.apply(this, args),
+        nodel   = getNodeEl(),
+        i       = directions.length,
+        coords,
+        scrollTop  = document.documentElement.scrollTop ||
+      rootElement.scrollTop,
+        scrollLeft = document.documentElement.scrollLeft ||
+      rootElement.scrollLeft
+
+    nodel.html(content)
+      .style('opacity', 1).style('pointer-events', 'all')
+
+    while (i--) nodel.classed(directions[i], false)
+    coords = directionCallbacks.get(dir).apply(this)
+    nodel.classed(dir, true)
+      .style('top', (coords.top + poffset[0]) + scrollTop + 'px')
+      .style('left', (coords.left + poffset[1]) + scrollLeft + 'px')
+
+    return tip
+  }
+
+  // Public - hide the tooltip
+  //
+  // Returns a tip
+  tip.hide = function() {
+    var nodel = getNodeEl()
+    nodel.style('opacity', 0).style('pointer-events', 'none')
+    return tip
+  }
+
+  // Public: Proxy attr calls to the d3 tip container.
+  // Sets or gets attribute value.
+  //
+  // n - name of the attribute
+  // v - value of the attribute
+  //
+  // Returns tip or attribute value
+  // eslint-disable-next-line no-unused-vars
+  tip.attr = function(n, v) {
+    if (arguments.length < 2 && typeof n === 'string') {
+      return getNodeEl().attr(n)
+    }
+
+    var args =  Array.prototype.slice.call(arguments)
+    d3_selection__WEBPACK_IMPORTED_MODULE_1__["selection"].prototype.attr.apply(getNodeEl(), args)
+    return tip
+  }
+
+  // Public: Proxy style calls to the d3 tip container.
+  // Sets or gets a style value.
+  //
+  // n - name of the property
+  // v - value of the property
+  //
+  // Returns tip or style property value
+  // eslint-disable-next-line no-unused-vars
+  tip.style = function(n, v) {
+    if (arguments.length < 2 && typeof n === 'string') {
+      return getNodeEl().style(n)
+    }
+
+    var args = Array.prototype.slice.call(arguments)
+    d3_selection__WEBPACK_IMPORTED_MODULE_1__["selection"].prototype.style.apply(getNodeEl(), args)
+    return tip
+  }
+
+  // Public: Set or get the direction of the tooltip
+  //
+  // v - One of n(north), s(south), e(east), or w(west), nw(northwest),
+  //     sw(southwest), ne(northeast) or se(southeast)
+  //
+  // Returns tip or direction
+  tip.direction = function(v) {
+    if (!arguments.length) return direction
+    direction = v == null ? v : functor(v)
+
+    return tip
+  }
+
+  // Public: Sets or gets the offset of the tip
+  //
+  // v - Array of [x, y] offset
+  //
+  // Returns offset or
+  tip.offset = function(v) {
+    if (!arguments.length) return offset
+    offset = v == null ? v : functor(v)
+
+    return tip
+  }
+
+  // Public: sets or gets the html value of the tooltip
+  //
+  // v - String value of the tip
+  //
+  // Returns html value or tip
+  tip.html = function(v) {
+    if (!arguments.length) return html
+    html = v == null ? v : functor(v)
+
+    return tip
+  }
+
+  // Public: sets or gets the root element anchor of the tooltip
+  //
+  // v - root element of the tooltip
+  //
+  // Returns root node of tip
+  tip.rootElement = function(v) {
+    if (!arguments.length) return rootElement
+    rootElement = v == null ? v : functor(v)
+
+    return tip
+  }
+
+  // Public: destroys the tooltip and removes it from the DOM
+  //
+  // Returns a tip
+  tip.destroy = function() {
+    if (node) {
+      getNodeEl().remove()
+      node = null
+    }
+    return tip
+  }
+
+  function d3TipDirection() { return 'n' }
+  function d3TipOffset() { return [0, 0] }
+  function d3TipHTML() { return ' ' }
+
+  var directionCallbacks = Object(d3_collection__WEBPACK_IMPORTED_MODULE_0__["map"])({
+        n:  directionNorth,
+        s:  directionSouth,
+        e:  directionEast,
+        w:  directionWest,
+        nw: directionNorthWest,
+        ne: directionNorthEast,
+        sw: directionSouthWest,
+        se: directionSouthEast
+      }),
+      directions = directionCallbacks.keys()
+
+  function directionNorth() {
+    var bbox = getScreenBBox(this)
+    return {
+      top:  bbox.n.y - node.offsetHeight,
+      left: bbox.n.x - node.offsetWidth / 2
+    }
+  }
+
+  function directionSouth() {
+    var bbox = getScreenBBox(this)
+    return {
+      top:  bbox.s.y,
+      left: bbox.s.x - node.offsetWidth / 2
+    }
+  }
+
+  function directionEast() {
+    var bbox = getScreenBBox(this)
+    return {
+      top:  bbox.e.y - node.offsetHeight / 2,
+      left: bbox.e.x
+    }
+  }
+
+  function directionWest() {
+    var bbox = getScreenBBox(this)
+    return {
+      top:  bbox.w.y - node.offsetHeight / 2,
+      left: bbox.w.x - node.offsetWidth
+    }
+  }
+
+  function directionNorthWest() {
+    var bbox = getScreenBBox(this)
+    return {
+      top:  bbox.nw.y - node.offsetHeight,
+      left: bbox.nw.x - node.offsetWidth
+    }
+  }
+
+  function directionNorthEast() {
+    var bbox = getScreenBBox(this)
+    return {
+      top:  bbox.ne.y - node.offsetHeight,
+      left: bbox.ne.x
+    }
+  }
+
+  function directionSouthWest() {
+    var bbox = getScreenBBox(this)
+    return {
+      top:  bbox.sw.y,
+      left: bbox.sw.x - node.offsetWidth
+    }
+  }
+
+  function directionSouthEast() {
+    var bbox = getScreenBBox(this)
+    return {
+      top:  bbox.se.y,
+      left: bbox.se.x
+    }
+  }
+
+  function initNode() {
+    var div = Object(d3_selection__WEBPACK_IMPORTED_MODULE_1__["select"])(document.createElement('div'))
+    div
+      .style('position', 'absolute')
+      .style('top', 0)
+      .style('opacity', 0)
+      .style('pointer-events', 'none')
+      .style('box-sizing', 'border-box')
+
+    return div.node()
+  }
+
+  function getSVGNode(element) {
+    var svgNode = element.node()
+    if (!svgNode) return null
+    if (svgNode.tagName.toLowerCase() === 'svg') return svgNode
+    return svgNode.ownerSVGElement
+  }
+
+  function getNodeEl() {
+    if (node == null) {
+      node = initNode()
+      // re-add node to DOM
+      rootElement.appendChild(node)
+    }
+    return Object(d3_selection__WEBPACK_IMPORTED_MODULE_1__["select"])(node)
+  }
+
+  // Private - gets the screen coordinates of a shape
+  //
+  // Given a shape on the screen, will return an SVGPoint for the directions
+  // n(north), s(south), e(east), w(west), ne(northeast), se(southeast),
+  // nw(northwest), sw(southwest).
+  //
+  //    +-+-+
+  //    |   |
+  //    +   +
+  //    |   |
+  //    +-+-+
+  //
+  // Returns an Object {n, s, e, w, nw, sw, ne, se}
+  function getScreenBBox(targetShape) {
+    var targetel   = target || targetShape
+
+    while (targetel.getScreenCTM == null && targetel.parentNode != null) {
+      targetel = targetel.parentNode
+    }
+
+    var bbox       = {},
+        matrix     = targetel.getScreenCTM(),
+        tbbox      = targetel.getBBox(),
+        width      = tbbox.width,
+        height     = tbbox.height,
+        x          = tbbox.x,
+        y          = tbbox.y
+
+    point.x = x
+    point.y = y
+    bbox.nw = point.matrixTransform(matrix)
+    point.x += width
+    bbox.ne = point.matrixTransform(matrix)
+    point.y += height
+    bbox.se = point.matrixTransform(matrix)
+    point.x -= width
+    bbox.sw = point.matrixTransform(matrix)
+    point.y -= height / 2
+    bbox.w = point.matrixTransform(matrix)
+    point.x += width
+    bbox.e = point.matrixTransform(matrix)
+    point.x -= width / 2
+    point.y -= height / 2
+    bbox.n = point.matrixTransform(matrix)
+    point.y += height
+    bbox.s = point.matrixTransform(matrix)
+
+    return bbox
+  }
+
+  // Private - replace D3JS 3.X d3.functor() function
+  function functor(v) {
+    return typeof v === 'function' ? v : function() {
+      return v
+    }
+  }
+
+  return tip
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/d3-transition/src/active.js":
 /*!**************************************************!*\
   !*** ./node_modules/d3-transition/src/active.js ***!
@@ -31529,11 +31875,12 @@ function sphericalTriangleArea(t) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
-/* harmony import */ var topojson__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! topojson */ "./node_modules/topojson/index.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
-/* harmony import */ var _map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./map */ "./src/map.js");
-/* harmony import */ var _parking_spots__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parking_spots */ "./src/parking_spots.js");
-/* harmony import */ var _projection__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./projection */ "./src/projection.js");
+/* harmony import */ var d3_tip__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! d3-tip */ "./node_modules/d3-tip/index.js");
+/* harmony import */ var topojson__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! topojson */ "./node_modules/topojson/index.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils */ "./src/utils.js");
+/* harmony import */ var _map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./map */ "./src/map.js");
+/* harmony import */ var _parking_spots__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parking_spots */ "./src/parking_spots.js");
+/* harmony import */ var _projection__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./projection */ "./src/projection.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -31548,14 +31895,46 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var svg = d3__WEBPACK_IMPORTED_MODULE_0__["select"]('svg'),
     height = +svg.attr('height'),
     width = +svg.attr('width');
 svg.attr('viewBox', '-550 -550 1100 1000');
-var projection = Object(_projection__WEBPACK_IMPORTED_MODULE_5__["default"])(width, height);
+var projection = Object(_projection__WEBPACK_IMPORTED_MODULE_6__["default"])(width, height);
 var path = d3__WEBPACK_IMPORTED_MODULE_0__["geoPath"]().projection(projection);
+var centered = null;
+
+var clicked = function clicked(d) {
+  var path = d3__WEBPACK_IMPORTED_MODULE_0__["geoPath"]().projection(projection);
+  var x, y, k;
+
+  if (d && centered !== d) {
+    var centroid = path.centroid(d);
+    x = centroid[0];
+    y = centroid[1];
+    k = 6;
+    centered = d;
+  } else {
+    x = width / 2;
+    y = height / 2;
+    k = 1;
+    centered = null;
+  }
+
+  svg.selectAll('path').style('fill', function (d) {
+    return centered && d === centered ? 'lightgrey' : 'rgb(52, 52, 52)';
+  });
+  d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').transition().duration(750).attr('transform', "translate(".concat(width / 2, ",").concat(height / 2, ")scale(").concat(k, ")translate(").concat(-x, ",").concat(-y, ")"));
+}; // Tooltip
+
+
+var tip = Object(d3_tip__WEBPACK_IMPORTED_MODULE_1__["default"])().attr('class', 'd3-tip').html(function (d) {
+  console.log(d);
+  return "<strong>Address:</strong> <span style='color:red'>" + d.address + "</span>";
+});
+svg.call(tip);
 var promises = [d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/sf.json'), d3__WEBPACK_IMPORTED_MODULE_0__["csv"]('data/metered.csv'), d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/unmetered.json')];
-Promise.all(promises).then(ready).then(callThis);
+Promise.all(promises).then(ready);
 
 function ready(_ref) {
   var _ref2 = _slicedToArray(_ref, 3),
@@ -31564,16 +31943,15 @@ function ready(_ref) {
       unmetered = _ref2[2];
 
   //Load map data
-  var precincts = topojson__WEBPACK_IMPORTED_MODULE_1__["feature"](sf, sf.objects.precinct); //Load parking spot data
+  var precincts = topojson__WEBPACK_IMPORTED_MODULE_2__["feature"](sf, sf.objects.precinct); //Load parking spot data
 
-  var _extractLatitudeAndLo = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["extractLatitudeAndLongitutes"])(metered, unmetered),
+  var _extractLatitudeAndLo = Object(_utils__WEBPACK_IMPORTED_MODULE_3__["extractLatitudeAndLongitutes"])(metered, unmetered),
       _extractLatitudeAndLo2 = _slicedToArray(_extractLatitudeAndLo, 2),
       metered_coordinates = _extractLatitudeAndLo2[0],
       unmetered_coordinates = _extractLatitudeAndLo2[1];
 
-  Object(_map__WEBPACK_IMPORTED_MODULE_3__["drawMap"])(svg, precincts, path);
-  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawMetered"])(metered_coordinates, projection);
-  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_4__["drawUnmetered"])(unmetered_coordinates, projection);
+  Object(_map__WEBPACK_IMPORTED_MODULE_4__["drawMap"])(svg, precincts, path, clicked);
+  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_5__["drawMetered"])(metered_coordinates, projection, tip, true); //drawUnmetered(unmetered_coordinates, projection, tip, true);
 }
 
 /***/ }),
@@ -31588,8 +31966,8 @@ function ready(_ref) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "drawMap", function() { return drawMap; });
-var drawMap = function drawMap(svg, precincts, path) {
-  svg.append('g').attr('class', 'precinct').selectAll('path').data(precincts.features).enter().append('path').attr('d', path);
+var drawMap = function drawMap(svg, precincts, path, clicked) {
+  svg.append('g').attr('class', 'precinct').selectAll('path').data(precincts.features).enter().append('path').attr('d', path).on('click', clicked);
 };
 
 /***/ }),
@@ -31606,28 +31984,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "drawMetered", function() { return drawMetered; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "drawUnmetered", function() { return drawUnmetered; });
 /* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
+var _this = undefined;
 
-var drawMetered = function drawMetered(metered_coordinates, projection) {
-  var stop_early = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+var drawMetered = function drawMetered(metered_coordinates, projection, tip) {
+  var stop_early = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
   var counter = 0;
   var total = metered_coordinates.length;
 
   if (stop_early) {
-    total = 10;
+    total = 3;
   }
 
   var t = d3__WEBPACK_IMPORTED_MODULE_0__["interval"](function () {
     var d = metered_coordinates[counter];
-    d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').append('circle').attr('r', 5.0).attr('class', 'metered').transition().duration(500).attr('cx', projection([d[1], d[0]])[0]).attr('cy', projection([d[1], d[0]])[1]).transition().duration(1000).attr('r', 3.0);
     counter = counter + 1;
 
     if (counter == total) {
       t.stop();
     }
+
+    var coord_array = [d.coordinates.longitude, d.coordinates.latitude];
+    console.log('Outer this', _this);
+
+    var mouseOverFunction = function mouseOverFunction() {
+      console.log('Inner this', _this);
+      tip.show();
+    };
+
+    d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').append('circle').datum(d).on('mouseover', function (d) {
+      d3__WEBPACK_IMPORTED_MODULE_0__["select"](this).transition().duration(100).attr('r', 10);
+      tip.show(d, this);
+    }) //.on('mouseover', mouseOverFunction)
+    // .on('mouseover', function (d) {
+    //   d3.select(this)
+    //     .transition()
+    //     .duration(1000)
+    //     .attr('r', 10);
+    //   tip.show(d);
+    // })
+    //.on('mouseover', tip.show)
+    // .on('mouseout', tip.hide)
+    .on('mouseout', function (d) {
+      d3__WEBPACK_IMPORTED_MODULE_0__["select"](this).transition().duration(100).attr('r', 3);
+      tip.hide(d, this);
+    }).attr('r', 5.0).attr('class', 'metered').transition().duration(500).attr('cx', projection(coord_array)[0]).attr('cy', projection(coord_array)[1]).transition().duration(1000).attr('r', 3.0);
   }, 1);
 };
-var drawUnmetered = function drawUnmetered(unmetered_coordinates, projection) {
-  var stop_early = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+var drawUnmetered = function drawUnmetered(unmetered_coordinates, projection, tip) {
+  var stop_early = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
   var j = 0;
   var total = unmetered_coordinates.length;
 
@@ -31696,7 +32101,14 @@ var extractLatitudeAndLongitutes = function extractLatitudeAndLongitutes(metered
     var lat = gps[0];
     var lng = gps[1];
     var coordinates = [lat, lng];
-    return coordinates;
+    var result = {
+      coordinates: {
+        latitude: lat,
+        longitude: lng
+      },
+      address: "".concat(e['STREETNAME'], " ").concat(e['STREET_NUM'])
+    };
+    return result;
   });
   var unmetered_coordinates = unmetered.features.map(function (e) {
     var gps = e.geometry.coordinates;

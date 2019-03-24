@@ -26,7 +26,10 @@
         "@babel/preset-env": "^7.3.4",
         "babel-loader": "^8.0.5",
         "d3": "^5.9.2",
+        "d3-tip": "^0.9.1",
+        "d3-zoom": "^1.7.3",
         "lodash": "^4.17.11",
+        "title-case": "^2.1.1",
         "topojson": "^3.0.2",
         "webpack": "^4.29.6",
         "webpack-cli": "^3.2.3"

@@ -18,7 +18,16 @@ export const extractLatitudeAndLongitutes = (metered, unmetered) => {
     let lat = gps[0];
     let lng = gps[1];
     let coordinates = [lat, lng];
-    return coordinates;
+
+    let result = {
+      coordinates : {
+        latitude : lat,
+        longitude : lng
+      },
+      address: `${e['STREETNAME']} ${e['STREET_NUM']}`
+    };
+    
+    return result;
   });
 
   let unmetered_coordinates = unmetered.features.map(e => {
