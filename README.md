@@ -23,5 +23,37 @@ D3 Visualization of Motorcycle Parking in San Francisco
 
 ## Fun Code Snippets
 
+Once you wrap your brain around how D3 works, you can implement some really snazzy transition effects easily.
+Below is the code, notice how you can just throw in a `.transition()` and `.duration()` in between each effect. 
+The results are pretty snazzy!
+
+```js
+d3.select('g')
+  .append('circle')
+  .datum(d)
+  .on('mouseover', function (d) {
+    d3.select(this)
+      .transition()
+      .duration(100)
+      .attr('r', 4);
+    tip.show(d, this);
+  })
+
+  .on('mouseout', function (d) {
+    d3.select(this)
+      .transition()
+      .duration(100)
+      .attr('r', 3);
+    tip.hide(d, this);
+  })
+  .attr('r', 5.0)
+  .attr('class', 'metered')
+  .attr('cx', projection(coord_array)[0])
+  .attr('cy', projection(coord_array)[1])
+  .transition()
+  .duration(1000)
+  .attr('r', 3.0);
+```
+
 ## Future Direction
 * Full Google Maps integration. Clicking on a specific spot should open up street view so you can see the physical layout of the surrounding area. 
