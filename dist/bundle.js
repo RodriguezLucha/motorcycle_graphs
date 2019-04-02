@@ -22258,7 +22258,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function(series, order) {
-  if (!((n = series.length) > 1)) return;
+  if (!((n = series.length) > 0)) return;
   for (var i, j = 0, d, dy, yp, yn, n, m = series[order[0]].length; j < m; ++j) {
     for (yp = yn = 0, i = 0; i < n; ++i) {
       if ((dy = (d = series[order[i]][j])[1] - d[0]) >= 0) {
@@ -32236,7 +32236,7 @@ var drawMetered = function drawMetered(metered_coordinates, projection, tip) {
     }).on('mouseout', function (d) {
       d3__WEBPACK_IMPORTED_MODULE_0__["select"](this).transition().duration(100).attr('r', 3);
       tip.hide(d, this);
-    }).attr('r', 5.0).attr('class', 'metered').transition().duration(500).attr('cx', projection(coord_array)[0]).attr('cy', projection(coord_array)[1]).transition().duration(1000).attr('r', 3.0);
+    }).attr('r', 5.0).attr('class', 'metered').attr('cx', projection(coord_array)[0]).attr('cy', projection(coord_array)[1]).transition().duration(1000).attr('r', 3.0);
   }, 1);
 };
 var drawUnmetered = function drawUnmetered(unmetered_coordinates, projection, tip) {
@@ -32257,13 +32257,13 @@ var drawUnmetered = function drawUnmetered(unmetered_coordinates, projection, ti
     }).on('mouseout', function (d) {
       d3__WEBPACK_IMPORTED_MODULE_0__["select"](this).transition().duration(100).attr('r', 3);
       tip.hide(d, this);
-    }).attr('r', 5.0).transition().duration(500).attr('class', 'unmetered').attr('cx', projection(coord_array)[0]).attr('cy', projection(coord_array)[1]).transition().duration(1000).attr('r', 3.0);
+    }).attr('r', 5.0).attr('class', 'unmetered').attr('cx', projection(coord_array)[0]).attr('cy', projection(coord_array)[1]).transition().duration(1000).attr('r', 3.0);
     j = j + 1;
 
     if (j === total) {
       t2.stop();
     }
-  }, 200);
+  }, 1);
 };
 
 /***/ }),

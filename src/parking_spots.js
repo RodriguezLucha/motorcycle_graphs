@@ -38,11 +38,8 @@ export const drawMetered = (metered_coordinates, projection, tip, stop_early = f
           .attr('r', 3);
         tip.hide(d, this);
       })
-
       .attr('r', 5.0)
       .attr('class', 'metered')
-      .transition()
-      .duration(500)
       .attr('cx', projection(coord_array)[0])
       .attr('cy', projection(coord_array)[1])
       .transition()
@@ -84,8 +81,6 @@ export const drawUnmetered = (unmetered_coordinates, projection, tip, stop_early
         tip.hide(d, this);
       })
       .attr('r', 5.0)
-      .transition()
-      .duration(500)
       .attr('class', 'unmetered')
       .attr('cx', projection(coord_array)[0])
       .attr('cy', projection(coord_array)[1])
@@ -99,5 +94,5 @@ export const drawUnmetered = (unmetered_coordinates, projection, tip, stop_early
     if (j === total) {
       t2.stop();
     }
-  }, 200);
+  }, 1);
 };
