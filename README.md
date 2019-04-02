@@ -16,6 +16,9 @@ D3 Visualization of Motorcycle Parking in San Francisco
 ## Key features
 
 * SVG based visualization built with D3
+
+![splash](https://github.com/RodriguezLucha/motorcycle_graphs/raw/master/screenshots/zoomed.png)
+
 * Hover, zoom, other misc render effects
 
 ## Fun Code Snippets
