@@ -32228,6 +32228,11 @@ var drawMetered = function drawMetered(metered_coordinates, projection, tip) {
     d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').append('circle').datum(d).on('mouseover', function (d) {
       d3__WEBPACK_IMPORTED_MODULE_0__["select"](this).transition().duration(100).attr('r', 4);
       tip.show(d, this);
+    }).on('click', function (d) {
+      var lat = d.lat;
+      var lng = d.lng;
+      var url = "https://maps.google.com/maps?layer=c&cbll=".concat(lat, ",").concat(lng);
+      window.open(url, '_blank');
     }).on('mouseout', function (d) {
       d3__WEBPACK_IMPORTED_MODULE_0__["select"](this).transition().duration(100).attr('r', 3);
       tip.hide(d, this);
@@ -32249,6 +32254,11 @@ var drawUnmetered = function drawUnmetered(unmetered_coordinates, projection, ti
     d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').append('circle').datum(du).on('mouseover', function (d) {
       d3__WEBPACK_IMPORTED_MODULE_0__["select"](this).transition().duration(100).attr('r', 4);
       tip.show(d, this);
+    }).on('click', function (d) {
+      var lat = d.lat;
+      var lng = d.lng;
+      var url = "https://maps.google.com/maps?layer=c&cbll=".concat(lat, ",").concat(lng);
+      window.open(url, '_blank');
     }).on('mouseout', function (d) {
       d3__WEBPACK_IMPORTED_MODULE_0__["select"](this).transition().duration(100).attr('r', 3);
       tip.hide(d, this);

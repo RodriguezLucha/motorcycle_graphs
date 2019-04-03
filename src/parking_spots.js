@@ -31,6 +31,13 @@ export const drawMetered = (metered_coordinates, projection, tip, stop_early = f
         tip.show(d, this);
       })
 
+      .on('click', (d) => {
+        let lat = d.lat;
+        let lng = d.lng;
+        let url = `https://maps.google.com/maps?layer=c&cbll=${lat},${lng}`;
+        window.open(url, '_blank');
+      })
+
       .on('mouseout', function (d) {
         d3.select(this)
           .transition()
@@ -51,7 +58,7 @@ export const drawMetered = (metered_coordinates, projection, tip, stop_early = f
 
 export const drawUnmetered = (unmetered_coordinates, projection, tip, stop_early = false) => {
   let j = 0;
-  let total = unmetered_coordinates.length; 
+  let total = unmetered_coordinates.length;
 
   if (stop_early) {
     total = debugTotal;
@@ -71,6 +78,13 @@ export const drawUnmetered = (unmetered_coordinates, projection, tip, stop_early
           .duration(100)
           .attr('r', 4);
         tip.show(d, this);
+      })
+
+      .on('click', (d) => {
+        let lat = d.lat;
+        let lng = d.lng;
+        let url = `https://maps.google.com/maps?layer=c&cbll=${lat},${lng}`;
+        window.open(url, '_blank');
       })
 
       .on('mouseout', function (d) {
