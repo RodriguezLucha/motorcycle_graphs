@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-const debugTotal = 10;
+const debugTotal = 3;
 
 export const drawMetered = (metered_coordinates, projection, tip, stop_early = false) => {
   let counter = 0;
@@ -18,7 +18,7 @@ export const drawMetered = (metered_coordinates, projection, tip, stop_early = f
       t.stop();
     }
 
-    let coord_array = [d.coordinates.longitude, d.coordinates.latitude];
+    let coord_array = [d.lng, d.lat];
 
     d3.select('g')
       .append('circle')
@@ -51,7 +51,7 @@ export const drawMetered = (metered_coordinates, projection, tip, stop_early = f
 
 export const drawUnmetered = (unmetered_coordinates, projection, tip, stop_early = false) => {
   let j = 0;
-  let total = unmetered_coordinates.length;
+  let total = unmetered_coordinates.length; 
 
   if (stop_early) {
     total = debugTotal;
@@ -60,7 +60,7 @@ export const drawUnmetered = (unmetered_coordinates, projection, tip, stop_early
   let t2 = d3.interval(() => {
     let du = unmetered_coordinates[j];
 
-    let coord_array = [du.coordinates.longitude, du.coordinates.latitude];
+    let coord_array = [du.lng, du.lat];
 
     d3.select('g')
       .append('circle')

@@ -32150,7 +32150,7 @@ var tip = Object(d3_tip__WEBPACK_IMPORTED_MODULE_1__["default"])().attr('class',
   return d.address;
 });
 svg.call(tip);
-var promises = [d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/sf.json'), d3__WEBPACK_IMPORTED_MODULE_0__["csv"]('data/metered.csv'), d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/unmetered.json')];
+var promises = [d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/sf.json'), d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/metered_cleaned.json'), d3__WEBPACK_IMPORTED_MODULE_0__["json"]('data/unmetered_cleaned.json')];
 Promise.all(promises).then(ready);
 
 function ready(_ref) {
@@ -32162,14 +32162,9 @@ function ready(_ref) {
   //Load map data
   var precincts = topojson__WEBPACK_IMPORTED_MODULE_2__["feature"](sf, sf.objects.precinct); //Load parking spot data
 
-  var _extractData = Object(_utils__WEBPACK_IMPORTED_MODULE_3__["extractData"])(metered, unmetered),
-      _extractData2 = _slicedToArray(_extractData, 2),
-      metered_coordinates = _extractData2[0],
-      unmetered_coordinates = _extractData2[1];
-
   Object(_map__WEBPACK_IMPORTED_MODULE_4__["drawMap"])(svg, precincts, path, clicked);
-  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_5__["drawMetered"])(metered_coordinates, projection, tip);
-  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_5__["drawUnmetered"])(unmetered_coordinates, projection, tip);
+  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_5__["drawMetered"])(metered, projection, tip);
+  Object(_parking_spots__WEBPACK_IMPORTED_MODULE_5__["drawUnmetered"])(unmetered, projection, tip);
 }
 
 /***/ }),
@@ -32211,7 +32206,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "drawUnmetered", function() { return drawUnmetered; });
 /* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
 
-var debugTotal = 10;
+var debugTotal = 3;
 var drawMetered = function drawMetered(metered_coordinates, projection, tip) {
   var stop_early = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
   var counter = 0;
@@ -32229,7 +32224,7 @@ var drawMetered = function drawMetered(metered_coordinates, projection, tip) {
       t.stop();
     }
 
-    var coord_array = [d.coordinates.longitude, d.coordinates.latitude];
+    var coord_array = [d.lng, d.lat];
     d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').append('circle').datum(d).on('mouseover', function (d) {
       d3__WEBPACK_IMPORTED_MODULE_0__["select"](this).transition().duration(100).attr('r', 4);
       tip.show(d, this);
@@ -32250,7 +32245,7 @@ var drawUnmetered = function drawUnmetered(unmetered_coordinates, projection, ti
 
   var t2 = d3__WEBPACK_IMPORTED_MODULE_0__["interval"](function () {
     var du = unmetered_coordinates[j];
-    var coord_array = [du.coordinates.longitude, du.coordinates.latitude];
+    var coord_array = [du.lng, du.lat];
     d3__WEBPACK_IMPORTED_MODULE_0__["select"]('g').append('circle').datum(du).on('mouseover', function (d) {
       d3__WEBPACK_IMPORTED_MODULE_0__["select"](this).transition().duration(100).attr('r', 4);
       tip.show(d, this);

@@ -28,22 +28,20 @@ svg.call(tip);
 
 let promises = [
   d3.json('data/sf.json'),
-  d3.csv('data/metered.csv'),
-  d3.json('data/unmetered.json'),
+  d3.json('data/metered_cleaned.json'),
+  d3.json('data/unmetered_cleaned.json'),
 ];
 
 Promise.all(promises).then(ready);
 
 function ready([sf, metered, unmetered]) {
-  
   //Load map data
   let precincts = topojson.feature(sf, sf.objects.precinct);
-  
+
   //Load parking spot data
-  let [metered_coordinates, unmetered_coordinates] = extractData(metered, unmetered);
 
   drawMap(svg, precincts, path, clicked);
-  drawMetered(metered_coordinates, projection, tip);
-  drawUnmetered(unmetered_coordinates, projection, tip);
+  drawMetered(metered, projection, tip);
+  drawUnmetered(unmetered, projection, tip);
 }
 
