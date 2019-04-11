@@ -56,4 +56,4 @@ d3.select('g')
 ```
 
 ## Future Direction
-* Full Google Maps integration. Clicking on a specific spot should open up street view so you can see the physical layout of the surrounding area. 
+* Search for moto parking spots given an address as input from the user.
