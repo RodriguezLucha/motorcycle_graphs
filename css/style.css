@@ -1,18 +1,18 @@
-
 .map {
   grid-area: map;
 }
 
 body {
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
     "header header header"
     "legend legend legend"
     "map_left map_center map_right"
+    "tip_left tip_center tip_right"
     "footer footer footer";
   grid-template-columns: 1fr auto 1fr;
   background-color: rgb(245, 245, 245);
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 svg {
@@ -27,14 +27,13 @@ svg {
   font-size: 3em;
   text-align: center;
   padding: 20px;
-  font-family: 'Libre Baskerville',serif;
+  font-family: "Libre Baskerville", serif;
 }
 
 .legend {
   grid-area: legend;
   text-align: center;
-    font-family: 'Libre Baskerville',
-    serif;
+  font-family: "Libre Baskerville", serif;
 }
 
 .map_left {
@@ -43,6 +42,17 @@ svg {
 
 .map_right {
   grid-area: map_right;
+}
+
+.tip_right {
+}
+.tip_center {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  color: rgb(41, 41, 41);
+}
+.tip_right {
 }
 .footer {
   grid-area: footer;
@@ -71,7 +81,7 @@ a:visited {
 }
 
 .footer .linkedin {
-  color:#0077B5;
+  color: #0077b5;
 }
 
 .source {
