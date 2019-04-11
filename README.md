@@ -21,6 +21,8 @@ D3 Visualization of Motorcycle Parking in San Francisco
 
 * Hover, zoom, other misc render effects
 
+* Google Maps Street View integration
+
 ## Fun Code Snippets
 
 Once you wrap your brain around how D3 works, you can implement some really snazzy transition effects easily.
